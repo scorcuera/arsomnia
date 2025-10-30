@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import MatrixReveal from '../components/MatrixReveal.astro';
 import SynapseReveal from '../components/SynapseReveal.astro';
 
 const base = import.meta.env.BASE_URL;
@@ -227,6 +226,7 @@ const base = import.meta.env.BASE_URL;
 		padding: 4rem 0;
 		position: relative;
 		overflow: hidden;
+		contain: layout style paint;
 	}
 
 	.hero-title {
@@ -267,6 +267,7 @@ const base = import.meta.env.BASE_URL;
 		gap: 0.5rem;
 		border: none;
 		cursor: pointer;
+		will-change: transform;
 	}
 
 	.btn-primary {
@@ -339,6 +340,7 @@ const base = import.meta.env.BASE_URL;
 		border-radius: 12px;
 		transition: transform 0.3s ease;
 		border: 1px solid rgba(212, 175, 55, 0.1);
+		will-change: transform;
 	}
 
 	.feature-card:hover {
@@ -410,6 +412,7 @@ const base = import.meta.env.BASE_URL;
 		color: inherit;
 		display: block;
 		border: 1px solid rgba(212, 175, 55, 0.1);
+		will-change: transform;
 	}
 
 	.project-card:hover {

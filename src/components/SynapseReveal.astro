@@ -13,6 +13,8 @@
 		height: 100%;
 		pointer-events: none;
 		opacity: 0.35;
+		contain: strict;
+		will-change: contents;
 	}
 </style>
 
@@ -34,9 +36,11 @@ const dpr = Math.max(1, window.devicePixelRatio || 1);
 	let lastMoveTs = 0;
 	let lastX = 0;
 	let lastY = 0;
+	let isVisible = true;
+	let animationId = 0;
 
-	// Parámetros
-	const MAX_NODES = 450;
+	// Parámetros - reducido para mejor rendimiento
+	const MAX_NODES = 300;
 	let tick = 0;
 
 	type Node = {
@@ -87,7 +91,7 @@ function resize() {
 
 // Sembrado global para cubrir más área del hero
 function seedField() {
-    const count = Math.min(MAX_NODES * 0.6, 280);
+    const count = Math.min(MAX_NODES * 0.5, 150);
     for (let i = 0; i < count; i++) {
         const px = Math.random() * width;
         const py = Math.random() * height;
@@ -121,9 +125,9 @@ function seedField() {
 		off.fillRect(0, 0, width, height);
 		off.globalCompositeOperation = 'source-over';
 
-		// Color acorde a la paleta
-		off.strokeStyle = '#8B7355';
-		off.fillStyle = '#8B7355';
+		// Color acorde a la nueva paleta dorada
+		off.strokeStyle = '#D4AF37';
+		off.fillStyle = '#D4AF37';
 		off.lineCap = 'round';
 
 		// Conexiones: conectar con hasta 3 vecinos cercanos en radio
@@ -187,6 +191,8 @@ function seedField() {
 let revealAmount = 0; // 0..1
 
 function render() {
+		if (!isVisible) return;
+
 		updateNodes();
 		drawNetwork();
 
@@ -233,7 +239,7 @@ function render() {
 		}
 
 		lastX = mouseX; lastY = mouseY;
-		requestAnimationFrame(render);
+		animationId = requestAnimationFrame(render);
 	}
 
 function onMove(e: MouseEvent) {
@@ -245,15 +251,32 @@ function onMove(e: MouseEvent) {
 		spawnAround(mouseX, mouseY, 6 + Math.floor(Math.random() * 6), 90);
 	}
 
+	// Optimización: pausar animación cuando no está visible
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			const wasVisible = isVisible;
+			isVisible = entry.isIntersecting;
+			if (isVisible && !wasVisible) {
+				animationId = requestAnimationFrame(render);
+			} else if (!isVisible && animationId) {
+				cancelAnimationFrame(animationId);
+			}
+		});
+	}, { threshold: 0.1 });
+
+	observer.observe(canvas);
+
 	window.addEventListener('resize', resize);
-	window.addEventListener('mousemove', onMove);
-resize();
-// Semilla inicial amplia para ocupar más área
-seedField();
-	requestAnimationFrame(render);
+	window.addEventListener('mousemove', onMove, { passive: true });
+	resize();
+	// Semilla inicial amplia para ocupar más área
+	seedField();
+	animationId = requestAnimationFrame(render);
 
 	// Limpieza al navegar
 	document.addEventListener('astro:before-swap', () => {
+		observer.disconnect();
+		cancelAnimationFrame(animationId);
 		window.removeEventListener('resize', resize);
 		window.removeEventListener('mousemove', onMove);
 	});
