@@ -15,7 +15,7 @@ const base = import.meta.env.BASE_URL;
 			</h1>
 			<p class="hero-subtitle" id="hero-subtitle">
 				Creo espacios digitales únicos para artistas y creativos, traduciendo<br />
-				fielmente su estética en experiencias web orgánicas.
+				fielmente tu estética en experiencias web orgánicas.
 			</p>
 			<div class="hero-buttons">
 				<a href="#proyectos" class="btn btn-primary">
@@ -78,7 +78,7 @@ const base = import.meta.env.BASE_URL;
 			const timeSinceMove = now - lastMouseMove;
 			
 			// Efecto puntual SOLO en caracteres cerca del cursor
-			const INFLUENCE_RADIUS = 80; // Radio de influencia alrededor del cursor
+			const INFLUENCE_RADIUS = 120; // Radio de influencia aumentado
 			const MAX_DISTORTION = 1.0; // Intensidad de la distorsión
 			
 			chars.forEach(char => {
@@ -96,9 +96,9 @@ const base = import.meta.env.BASE_URL;
 					const distortion = influence * MAX_DISTORTION;
 					
 					// Empujar las letras hacia afuera desde el cursor (efecto de repulsión)
-					const offsetX = (dx / distance) * distortion * 4;
-					const offsetY = (dy / distance) * distortion * 4;
-					const blur = influence * 0.6;
+					const offsetX = (dx / distance) * distortion * 8; // Mayor desplazamiento
+					const offsetY = (dy / distance) * distortion * 8; // Mayor desplazamiento
+					const blur = influence * 1.5; // Mayor desenfoque
 					
 					char.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
 					char.style.filter = `blur(${blur}px)`;
