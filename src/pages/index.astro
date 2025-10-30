@@ -143,53 +143,35 @@ const base = import.meta.env.BASE_URL;
 			<div class="about-content">
 				<div class="about-text">
 					<h2 class="section-title">
-						Transformo tu visión<br />
-						creativa en presencia<br />
-						digital
+						De creador<br />
+						a creador<br />
 					</h2>
-					<p class="about-description">
-						Me especializo en crear portfolios web y experiencias digitales para artistas y creadores.
-					</p>
-					<p class="about-description">
-						Cada artista tiene una voz única. Por eso, trabajo 
-						estrechamente contigo para capturar la esencia de tu identidad visual y 
-						traducirla en una experiencia digital coherente y memorable.
-					</p>
+					<figure class="about-portrait">
+						<img
+							src={`${base}/sergio_corcuera.jpeg`}
+							alt="Retrato de Sergio Corcuera"
+							loading="lazy"
+							decoding="async"
+						/>
+					</figure>
 				</div>
 				<div class="about-features">
 					<div class="feature-card">
-						<div class="feature-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
-							</svg>
-						</div>
 						<h3 class="feature-title">Diseño Personalizado</h3>
 						<p class="feature-text">
-							Cada proyecto es único, diseñado específicamente para reflejar la 
-							identidad visual del artista.
+							Tu visión creativa es única. Trabajo estrechamente contigo para capturar tu identidad visual y traducirla en una experiencia digital coherente.
 						</p>
 					</div>
 					<div class="feature-card">
-						<div class="feature-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" fill="currentColor"/>
-							</svg>
-						</div>
 						<h3 class="feature-title">Visibilidad Estratégica</h3>
 						<p class="feature-text">
-							Optimización de la presentación de tu trabajo para maximizar el impacto y 
-							alcance de tu proyecto.
+							Tu idea es buena, encontremos su mejor traje. Optimizo la presentación de tu trabajo para maximizar su alcance.
 						</p>
 					</div>
 					<div class="feature-card">
-						<div class="feature-icon">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-								<path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" fill="currentColor"/>
-							</svg>
-						</div>
 						<h3 class="feature-title">Estética Orgánica</h3>
 						<p class="feature-text">
-							Creación de espacios limpios y orgánicos donde tu arte es siempre el protagonista.
+							Tu mensaje es original. Exige matices, contrastes y texturas del mundo vivo.
 						</p>
 					</div>
 				</div>
@@ -276,7 +258,10 @@ const base = import.meta.env.BASE_URL;
 					</p>
 				</div>
 
-				<form class="contact-form">
+				<form id="contact-form" class="contact-form" action="https://formspree.io/f/mgvplpyr" method="POST">
+					<!-- Honeypot field for spam protection -->
+					<input type="text" name="_gotcha" style="display:none" />
+
 					<div class="form-row">
 						<div class="form-group">
 							<label for="name">Nombre</label>
@@ -300,11 +285,58 @@ const base = import.meta.env.BASE_URL;
 						<label for="message">Mensaje</label>
 						<textarea id="message" name="message" rows="6" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
 					</div>
-					<button type="submit" class="btn btn-primary btn-full">Enviar Mensaje</button>
+					<button type="submit" id="contact-submit-btn" class="btn btn-primary btn-full">Enviar Mensaje</button>
 				</form>
+				<p id="form-status" class="form-status"></p>
 			</div>
 		</div>
 	</section>
+
+	<script>
+		// Form Submission Handler
+		const form = document.getElementById('contact-form') as HTMLFormElement;
+		const statusEl = document.getElementById('form-status');
+		const submitBtn = document.getElementById('contact-submit-btn');
+
+		async function handleSubmit(event: Event) {
+			event.preventDefault();
+			if (!form || !statusEl || !submitBtn) return;
+
+			const formData = new FormData(event.target as HTMLFormElement);
+			submitBtn.textContent = 'Enviando...';
+			submitBtn.setAttribute('disabled', 'true');
+			statusEl.textContent = '';
+			statusEl.className = 'form-status';
+
+			try {
+				const response = await fetch(form.action, {
+					method: form.method,
+					body: formData,
+					headers: {
+						'Accept': 'application/json'
+					}
+				});
+
+				if (response.ok) {
+					statusEl.textContent = "¡Gracias por tu mensaje! Te responderé pronto.";
+					statusEl.classList.add('success');
+					form.reset();
+				} else {
+					const data = await response.json();
+					statusEl.textContent = data.error || 'Oops! Hubo un problema al enviar el formulario.';
+					statusEl.classList.add('error');
+				}
+			} catch (error) {
+				statusEl.textContent = 'Oops! Hubo un problema de red.';
+				statusEl.classList.add('error');
+			} finally {
+				submitBtn.textContent = 'Enviar Mensaje';
+				submitBtn.removeAttribute('disabled');
+			}
+		}
+
+		form?.addEventListener('submit', handleSubmit);
+	</script>
 
 	<!-- Footer -->
 	<footer class="footer">
@@ -433,6 +465,35 @@ const base = import.meta.env.BASE_URL;
 		grid-template-columns: 1fr 1fr;
 		gap: 6rem;
 		align-items: start;
+	}
+
+	.about-text {
+		/* Move the text and photo block up slightly */
+		transform: translateY(-2rem);
+	}
+
+	.about-portrait {
+		width: 100%;
+		max-width: 320px;
+		margin: 0 0 1.5rem 0;
+		border-radius: 16px;
+		overflow: hidden;
+		border: 1px solid rgba(212, 175, 55, 0.15);
+		box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+	}
+
+	.about-portrait img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		filter: saturate(1.05) contrast(1.05);
+		transition: transform 0.4s ease;
+	}
+
+	.about-portrait:hover img {
+		transform: scale(1.02);
 	}
 
 	.section-title {
@@ -649,6 +710,22 @@ const base = import.meta.env.BASE_URL;
 		border: 1px solid rgba(212, 175, 55, 0.1);
 	}
 
+	.form-status {
+		text-align: center;
+		margin-top: 1.5rem;
+		min-height: 1.5rem;
+		font-weight: 500;
+		transition: color 0.3s ease;
+	}
+
+	.form-status.success {
+		color: #4CAF50; /* Verde éxito */
+	}
+
+	.form-status.error {
+		color: #F44336; /* Rojo error */
+	}
+
 	.form-row {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -784,6 +861,18 @@ const base = import.meta.env.BASE_URL;
 		.about-content {
 			grid-template-columns: 1fr;
 			gap: 3rem;
+		}
+
+		.about-text {
+			transform: none; /* Reset vertical shift for mobile */
+		}
+
+		.about .section-title {
+			text-align: center;
+		}
+
+		.about-portrait {
+			margin: 0 auto 1.25rem;
 		}
 
 		.section-title,
