@@ -1,0 +1,262 @@
+---
+// Animación orgánica de sinapsis revelada sólo alrededor del cursor cuando se mueve
+---
+
+<canvas id="synapse-canvas"></canvas>
+
+<style>
+	#synapse-canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		opacity: 0.35;
+	}
+</style>
+
+<script>
+	const canvas = document.getElementById('synapse-canvas') as HTMLCanvasElement;
+	const ctx = canvas.getContext('2d')!;
+
+	let width = 0;
+	let height = 0;
+const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+	// offscreen para componer
+	const offscreen = document.createElement('canvas');
+	const off = offscreen.getContext('2d')!;
+
+	// Estado del cursor y revelado
+	let mouseX = 0;
+	let mouseY = 0;
+	let lastMoveTs = 0;
+	let lastX = 0;
+	let lastY = 0;
+
+	// Parámetros
+	const MAX_NODES = 450;
+	let tick = 0;
+
+	type Node = {
+		x: number;
+		y: number;
+		vx: number;
+		vy: number;
+		age: number;
+		maxAge: number;
+		pulse: number; // fase para animación
+	};
+
+let nodes: Node[] = [];
+const BASE_ALPHA = 0.55; // menos acentuado
+
+function resize() {
+		width = canvas.clientWidth;
+		height = canvas.clientHeight;
+		canvas.width = Math.floor(width * dpr);
+		canvas.height = Math.floor(height * dpr);
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+		offscreen.width = Math.floor(width * dpr);
+		offscreen.height = Math.floor(height * dpr);
+		off.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+	function addNode(x: number, y: number) {
+		if (nodes.length >= MAX_NODES) return;
+		nodes.push({
+			x,
+			y,
+			vx: (Math.random() - 0.5) * 0.6,
+			vy: (Math.random() - 0.5) * 0.6,
+			age: 0,
+			maxAge: 800 + Math.random() * 600,
+			pulse: Math.random() * Math.PI * 2,
+		});
+	}
+
+	function spawnAround(x: number, y: number, count = 6, radius = 70) {
+		for (let i = 0; i < count; i++) {
+			const a = Math.random() * Math.PI * 2;
+			const r = Math.sqrt(Math.random()) * radius;
+			addNode(x + Math.cos(a) * r, y + Math.sin(a) * r);
+		}
+	}
+
+// Sembrado global para cubrir más área del hero
+function seedField() {
+    const count = Math.min(MAX_NODES * 0.6, 280);
+    for (let i = 0; i < count; i++) {
+        const px = Math.random() * width;
+        const py = Math.random() * height;
+        addNode(px, py);
+    }
+}
+
+	function updateNodes() {
+		tick++;
+		for (let i = nodes.length - 1; i >= 0; i--) {
+			const n = nodes[i];
+			n.age++;
+			// Pequeño ruido / wander
+			n.vx += (Math.random() - 0.5) * 0.06;
+			n.vy += (Math.random() - 0.5) * 0.06;
+			n.vx *= 0.98;
+			n.vy *= 0.98;
+			n.x += n.vx;
+			n.y += n.vy;
+			// Rebote suave en bordes
+			if (n.x < 0 || n.x > width) n.vx *= -1, n.x = Math.max(0, Math.min(width, n.x));
+			if (n.y < 0 || n.y > height) n.vy *= -1, n.y = Math.max(0, Math.min(height, n.y));
+			if (n.age > n.maxAge) nodes.splice(i, 1);
+		}
+	}
+
+	function drawNetwork() {
+		// Fade del offscreen
+		off.globalCompositeOperation = 'destination-out';
+		off.fillStyle = 'rgba(0,0,0,0.08)';
+		off.fillRect(0, 0, width, height);
+		off.globalCompositeOperation = 'source-over';
+
+		// Color acorde a la paleta
+		off.strokeStyle = '#8B7355';
+		off.fillStyle = '#8B7355';
+		off.lineCap = 'round';
+
+		// Conexiones: conectar con hasta 3 vecinos cercanos en radio
+		const maxLinks = 3;
+		const linkRadius = 160; // mayor alcance para ocupar más área
+
+		for (let i = 0; i < nodes.length; i++) {
+			const a = nodes[i];
+			let nearest: {j: number; d2: number}[] = [];
+			for (let j = 0; j < nodes.length; j++) {
+				if (i === j) continue;
+				const b = nodes[j];
+				const dx = a.x - b.x;
+				const dy = a.y - b.y;
+				const d2 = dx * dx + dy * dy;
+				if (d2 < linkRadius * linkRadius) {
+					nearest.push({ j, d2 });
+				}
+			}
+			nearest.sort((m, n) => m.d2 - n.d2);
+			for (let k = 0; k < Math.min(maxLinks, nearest.length); k++) {
+				const b = nodes[nearest[k].j];
+				const dist = Math.sqrt(nearest[k].d2) || 1;
+				const alpha = Math.max(0.06, 1 - dist / linkRadius) * 0.85;
+				off.globalAlpha = BASE_ALPHA * alpha;
+				off.lineWidth = Math.max(0.6, 2.2 - dist / 80);
+				off.beginPath();
+				off.moveTo(a.x, a.y);
+
+				// Curvatura orgánica basada en la perpendicular del segmento y un pulso temporal
+				const dx = b.x - a.x;
+				const dy = b.y - a.y;
+				const inv = 1 / dist;
+				const nx = -dy * inv; // perpendicular normalizada
+				const ny = dx * inv;
+				const t = tick * 0.06 + i * 0.3 + k * 0.7;
+				const bend = Math.min(24, 8 + (linkRadius - dist) * 0.12) * (0.6 + Math.sin(t) * 0.4);
+
+				// Dos puntos de control para una S-curve suave
+				const c1x = a.x + dx * 0.33 + nx * bend;
+				const c1y = a.y + dy * 0.33 + ny * bend;
+				const c2x = a.x + dx * 0.66 - nx * bend * 0.8;
+				const c2y = a.y + dy * 0.66 - ny * bend * 0.8;
+
+				off.bezierCurveTo(c1x, c1y, c2x, c2y, b.x, b.y);
+				off.stroke();
+			}
+
+			// Nodo con pulso
+			const pulse = 1 + Math.sin(tick * 0.05 + a.pulse) * 0.3;
+			off.globalAlpha = BASE_ALPHA * 0.6;
+			off.beginPath();
+			off.arc(a.x, a.y, 1.2 * pulse, 0, Math.PI * 2);
+			off.fill();
+		}
+
+		off.globalAlpha = 1;
+	}
+
+// Revelado progresivo
+let revealAmount = 0; // 0..1
+
+function render() {
+		updateNodes();
+		drawNetwork();
+
+		// Revelado más progresivo
+		const dt = performance.now() - lastMoveTs;
+		const target = Math.max(0, Math.min(1, 1 - dt / 1000)); // se apaga en ~1s
+		revealAmount += (target - revealAmount) * 0.12;
+
+		ctx.clearRect(0, 0, width, height);
+		if (revealAmount > 0.02) {
+			ctx.globalCompositeOperation = 'source-over';
+			ctx.globalAlpha = revealAmount;
+			ctx.drawImage(offscreen, 0, 0, width, height);
+			// Máscara radial
+			const dx = mouseX - lastX;
+			const dy = mouseY - lastY;
+			const speed = Math.min(1, Math.hypot(dx, dy) / 40);
+			const radius = 160 + speed * 140; // radio mayor para cubrir más
+			ctx.globalCompositeOperation = 'destination-in';
+			const g = ctx.createRadialGradient(mouseX, mouseY, radius * 0.35, mouseX, mouseY, radius);
+			g.addColorStop(0, 'rgba(255,255,255,1)');
+			g.addColorStop(1, 'rgba(255,255,255,0)');
+			ctx.fillStyle = g;
+			ctx.fillRect(0, 0, width, height);
+
+			// Excluir botones (no revelar en su alrededor inmediato)
+			ctx.globalCompositeOperation = 'destination-out';
+			const hero = document.getElementById('inicio');
+			if (hero) {
+				const rectCanvas = canvas.getBoundingClientRect();
+				const btns = hero.querySelectorAll('.btn');
+				btns.forEach((el) => {
+					const r = (el as HTMLElement).getBoundingClientRect();
+					const pad = 18; // margen alrededor del botón
+					const x = r.left - rectCanvas.left - pad;
+					const y = r.top - rectCanvas.top - pad;
+					const w = r.width + pad * 2;
+					const h = r.height + pad * 2;
+					ctx.fillRect(x, y, w, h);
+				});
+			}
+
+			ctx.globalAlpha = 1;
+		}
+
+		lastX = mouseX; lastY = mouseY;
+		requestAnimationFrame(render);
+	}
+
+function onMove(e: MouseEvent) {
+		const rect = canvas.getBoundingClientRect();
+		mouseX = e.clientX - rect.left;
+		mouseY = e.clientY - rect.top;
+		lastMoveTs = performance.now();
+		// Generar más nodos donde pasa el cursor
+		spawnAround(mouseX, mouseY, 6 + Math.floor(Math.random() * 6), 90);
+	}
+
+	window.addEventListener('resize', resize);
+	window.addEventListener('mousemove', onMove);
+resize();
+// Semilla inicial amplia para ocupar más área
+seedField();
+	requestAnimationFrame(render);
+
+	// Limpieza al navegar
+	document.addEventListener('astro:before-swap', () => {
+		window.removeEventListener('resize', resize);
+		window.removeEventListener('mousemove', onMove);
+	});
+</script>
+
+
