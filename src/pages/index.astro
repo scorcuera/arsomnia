@@ -9,11 +9,11 @@ const base = import.meta.env.BASE_URL;
 	<!-- Hero Section -->
 	<section id="inicio" class="hero">
 		<SynapseReveal />
-		<div class="container">
-			<h1 class="hero-title">
+		<div class="container hero-content" id="hero-content">
+			<h1 class="hero-title" id="hero-title">
 				Digitalizo tu proyecto creativo<br />
 			</h1>
-			<p class="hero-subtitle">
+			<p class="hero-subtitle" id="hero-subtitle">
 				Creo espacios digitales únicos para artistas y creativos, traduciendo<br />
 				fielmente su estética en experiencias web orgánicas.
 			</p>
@@ -28,6 +28,114 @@ const base = import.meta.env.BASE_URL;
 			</div>
 		</div>
 	</section>
+
+	<script>
+		// Efecto líquido puntual: solo afecta letras cerca del cursor
+		const hero = document.getElementById('inicio');
+		const heroTitle = document.getElementById('hero-title');
+		const heroSubtitle = document.getElementById('hero-subtitle');
+		let lastMouseMove = 0;
+		let animationId = 0;
+		
+		// Dividir texto en caracteres para efecto puntual (respetando espacios)
+		function wrapChars(el: HTMLElement | null) {
+			if (!el || el.dataset.wrapped === '1') return;
+			const text = el.textContent || '';
+			el.innerHTML = '';
+			el.dataset.wrapped = '1';
+			
+			for (const char of text) {
+				if (char === '\n') {
+					el.appendChild(document.createElement('br'));
+					continue;
+				}
+				if (char === ' ') {
+					el.appendChild(document.createTextNode(' '));
+					continue;
+				}
+				const span = document.createElement('span');
+				span.className = 'char';
+				span.textContent = char;
+				span.style.display = 'inline-block';
+				span.style.willChange = 'transform, filter';
+				el.appendChild(span);
+			}
+		}
+		
+		wrapChars(heroTitle);
+		wrapChars(heroSubtitle);
+		
+		const chars = [
+			...Array.from(heroTitle?.querySelectorAll('.char') || []) as HTMLElement[],
+			...Array.from(heroSubtitle?.querySelectorAll('.char') || []) as HTMLElement[]
+		];
+		
+		let mouseX = -1000;
+		let mouseY = -1000;
+		
+		function updateLiquidEffect() {
+			const now = performance.now();
+			const timeSinceMove = now - lastMouseMove;
+			
+			// Efecto puntual SOLO en caracteres cerca del cursor
+			const INFLUENCE_RADIUS = 80; // Radio de influencia alrededor del cursor
+			const MAX_DISTORTION = 1.0; // Intensidad de la distorsión
+			
+			chars.forEach(char => {
+				const rect = char.getBoundingClientRect();
+				const charX = rect.left + rect.width / 2;
+				const charY = rect.top + rect.height / 2;
+				
+				const dx = charX - mouseX;
+				const dy = charY - mouseY;
+				const distance = Math.sqrt(dx * dx + dy * dy);
+				
+				if (distance < INFLUENCE_RADIUS && timeSinceMove < 2000) {
+					// Calcular influencia: 1 cuando está en el centro, 0 en el borde
+					const influence = 1 - (distance / INFLUENCE_RADIUS);
+					const distortion = influence * MAX_DISTORTION;
+					
+					// Empujar las letras hacia afuera desde el cursor (efecto de repulsión)
+					const offsetX = (dx / distance) * distortion * 4;
+					const offsetY = (dy / distance) * distortion * 4;
+					const blur = influence * 0.6;
+					
+					char.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+					char.style.filter = `blur(${blur}px)`;
+				} else {
+					// Letras fuera del radio o sin movimiento reciente
+					char.style.transform = 'none';
+					char.style.filter = 'none';
+				}
+			});
+			
+			// Continuar animando solo si el cursor se movió recientemente
+			if (timeSinceMove < 2500) {
+				animationId = requestAnimationFrame(updateLiquidEffect);
+			} else {
+				animationId = 0;
+			}
+		}
+		
+		if (hero) {
+			// NO aplicar filtro SVG al contenido (solo efecto puntual en caracteres)
+			
+			hero.addEventListener('mousemove', (e: MouseEvent) => {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				lastMouseMove = performance.now();
+				
+				if (!animationId) {
+					animationId = requestAnimationFrame(updateLiquidEffect);
+				}
+			}, { passive: true });
+			
+			hero.addEventListener('mouseleave', () => {
+				mouseX = -1000;
+				mouseY = -1000;
+			}, { passive: true });
+		}
+	</script>
 
 	<!-- About Section -->
 	<section id="acerca" class="about">
@@ -229,12 +337,22 @@ const base = import.meta.env.BASE_URL;
 		contain: layout style paint;
 	}
 
+	.hero-content {
+		position: relative;
+		z-index: 10;
+	}
+
 	.hero-title {
 		font-size: 5rem;
 		font-weight: 700;
 		line-height: 1.1;
 		margin-bottom: 2rem;
 		color: var(--color-text);
+	}
+
+	.hero-title .char {
+		display: inline-block;
+		transition: transform 0.1s ease, filter 0.1s ease;
 	}
 
 	.hero-title-accent {
@@ -246,6 +364,11 @@ const base = import.meta.env.BASE_URL;
 		color: var(--color-text-light);
 		margin-bottom: 3rem;
 		line-height: 1.8;
+	}
+
+	.hero-subtitle .char {
+		display: inline-block;
+		transition: transform 0.1s ease, filter 0.1s ease;
 	}
 
 	.hero-buttons {
