@@ -31,7 +31,7 @@ const base = import.meta.env.BASE_URL;
 
 	<script>
 		// Efecto líquido puntual: solo afecta letras cerca del cursor
-		const hero = document.getElementById('inicio');
+		const hero = document.querySelector<HTMLElement>('.hero');
 		const heroTitle = document.getElementById('hero-title');
 		const heroSubtitle = document.getElementById('hero-subtitle');
 		let lastMouseMove = 0;
@@ -117,7 +117,7 @@ const base = import.meta.env.BASE_URL;
 			}
 		}
 		
-		if (hero) {
+		if (hero && window.matchMedia("(min-width: 769px)").matches) {
 			// NO aplicar filtro SVG al contenido (solo efecto puntual en caracteres)
 			
 			hero.addEventListener('mousemove', (e: MouseEvent) => {
@@ -165,7 +165,7 @@ const base = import.meta.env.BASE_URL;
 					<div class="feature-card">
 						<h3 class="feature-title">Visibilidad Estratégica</h3>
 						<p class="feature-text">
-							Tu idea es buena, encontremos su mejor traje. Optimizo la presentación de tu trabajo para maximizar su alcance.
+							Tu idea es buena y hay que encontrar su mejor traje. Optimizo la presentación de tu trabajo para maximizar su alcance.
 						</p>
 					</div>
 					<div class="feature-card">
@@ -221,7 +221,7 @@ const base = import.meta.env.BASE_URL;
 						</svg>
 					</div>
 					<p class="project-description">
-						Portfolio fotográfico que resalta el diálogo visual entre el fotógrafo y su principal inspiración artística: Edward Hopper.
+						Portfolio fotográfico que resalta el diálogo visual entre el fotógrafo y el pintor Edward Hopper, su principal inspiración artística.
 					</p>
 				</div>
 			</a>
