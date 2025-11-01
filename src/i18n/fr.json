@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Je digitalise ton projet créatif",
+    "subtitle": "Je t'aide à traduire ton identité esthétique<br />en une expérience web organique",
+    "cta_primary": "Voir les Projets",
+    "cta_secondary": "Me Contacter"
+  },
+  "about": {
+    "headline": "Je travaille avec des créateurs qui ne veulent pas<br />un site web générique",
+    "bio": "Je suis développeur web, mais je suis aussi créateur. Je comprends que ton projet créatif nécessite plus qu'un simple template. Je traduis des identités visuelles complexes en expériences numériques qui respectent ton esthétique et connectent avec ton audience.",
+    "cta": "Parlons de ton projet",
+    "approach_title": "Mon approche",
+    "approach_1_title": "Design Personnalisé",
+    "approach_1_text": "Ta vision est unique. Je travaille avec toi pour capturer ton identité visuelle et la traduire en une expérience numérique cohérente.",
+    "approach_2_title": "Visibilité Stratégique",
+    "approach_2_text": "Ta idée est excellente et mérite la meilleure vitrine. J'optimise chaque détail pour maximiser l'impact de ton travail.",
+    "approach_3_title": "Esthétique Organique",
+    "approach_3_text": "Ton message est original et exige des nuances. Je crée des expériences avec des textures, des contrastes et le mouvement du monde vivant."
+  },
+  "projects": {
+    "title": "Projets Phares",
+    "subtitle": "Une sélection de projets que j'ai réalisés pour des artistes et créateurs",
+    "nectario": {
+      "name": "El nectario",
+      "category": "Blog littéraire",
+      "description": "Portfolio de récits avec un accent sur l'expérience de lecture. Design minimaliste et couleurs harmonieuses avec le style de l'auteur."
+    },
+    "hopper": {
+      "name": "Buscando a Hopper",
+      "category": "Projet photographique",
+      "description": "Portfolio photographique qui met en valeur le dialogue visuel entre le photographe et le peintre Edward Hopper, sa principale inspiration artistique."
+    },
+    "vagari": {
+      "name": "Vagari",
+      "category": "Expérience immersive",
+      "description": "Expérience immersive de voyages virtuels avec un accent sur la navigation intuitive et la performance des requêtes."
+    }
+  },
+  "contact": {
+    "title": "Parlons de ton projet",
+    "subtitle": "Créons quelque chose d'incroyable ?",
+    "form": {
+      "name": "Nom",
+      "name_placeholder": "Ton nom",
+      "email": "Email",
+      "email_placeholder": "ton@email.com",
+      "project_type": "Type de Projet",
+      "project_type_placeholder": "Selectionne une option",
+      "project_type_portfolio": "Portfolio Personnel",
+      "project_type_corporate": "Site Corporate",
+      "project_type_other": "Autre",
+      "message": "Message",
+      "message_placeholder": "Parle-moi de ton projet...",
+      "submit": "Envoyer le Message",
+      "sending": "Envoi en cours...",
+      "success": "Merci pour ton message ! Je te répondrai bientôt.",
+      "error": "Oups ! Un problème est survenu lors de l'envoi du formulaire.",
+      "network_error": "Oups ! Un problème de réseau est survenu."
+    }
+  }
+}
+

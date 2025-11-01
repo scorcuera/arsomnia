@@ -1,0 +1,68 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Digitalizo tu proyecto creativo",
+    "subtitle": "Te ayudo a traducir tu identidad estética<br />en una experiencia web orgánica",
+    "cta_primary": "Ver Proyectos",
+    "cta_secondary": "Contactar"
+  },
+  "about": {
+    "headline": "Trabajo con creadores que no quieren<br />un sitio web genérico",
+    "bio": "Soy desarrollador web, pero también soy creador. Entiendo que tu proyecto creativo necesita más que una plantilla. Traduzco identidades visuales complejas en experiencias digitales que respetan tu estética y conectan con tu audiencia.",
+    "cta": "Hablemos de tu proyecto",
+    "approach_title": "Mi enfoque",
+    "approach_1_title": "Diseño Personalizado",
+    "approach_1_text": "Tu visión es única. Trabajo contigo para capturar tu identidad visual y traducirla en una experiencia digital coherente.",
+    "approach_2_title": "Visibilidad Estratégica",
+    "approach_2_text": "Tu idea es buena y merece el mejor escaparate. Optimizo cada detalle para maximizar el impacto de tu trabajo.",
+    "approach_3_title": "Estética Orgánica",
+    "approach_3_text": "Tu mensaje es original y exige matices. Creo experiencias con texturas, contrastes y movimiento del mundo vivo."
+  },
+  "projects": {
+    "title": "Proyectos Destacados",
+    "subtitle": "Una selección de proyectos que he realizado para artistas y creadores",
+    "nectario": {
+      "name": "El nectario",
+      "category": "Blog de escritura",
+      "description": "Portfolio de relatos con enfoque en la experiencia de lectura. Diseño minimalista y colores armónicos con el estilo del autor."
+    },
+    "hopper": {
+      "name": "Buscando a Hopper",
+      "category": "Proyecto de fotografía",
+      "description": "Portfolio fotográfico que resalta el diálogo visual entre el fotógrafo y el pintor Edward Hopper, su principal inspiración artística."
+    },
+    "vagari": {
+      "name": "Vagari",
+      "category": "Experiencia inmersiva",
+      "description": "Experiencia inmersiva de viajes virtuales con enfoque en la navegación intuitiva y el rendimiento de las consultas."
+    }
+  },
+  "contact": {
+    "title": "Hablemos de tu proyecto",
+    "subtitle": "¿Creamos algo increíble?",
+    "form": {
+      "name": "Nombre",
+      "name_placeholder": "Tu nombre",
+      "email": "Email",
+      "email_placeholder": "tu@email.com",
+      "project_type": "Tipo de Proyecto",
+      "project_type_placeholder": "Selecciona una opción",
+      "project_type_portfolio": "Portfolio Personal",
+      "project_type_corporate": "Sitio Corporativo",
+      "project_type_other": "Otro",
+      "message": "Mensaje",
+      "message_placeholder": "Cuéntame sobre tu proyecto...",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Gracias por tu mensaje! Te responderé pronto.",
+      "error": "Oops! Hubo un problema al enviar el formulario.",
+      "network_error": "Oops! Hubo un problema de red."
+    }
+  }
+}
+

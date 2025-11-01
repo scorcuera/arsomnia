@@ -5,4 +5,11 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
     site: 'https://scorcuera.github.io',
     base: '/arsomnia',
+    i18n: {
+        defaultLocale: 'es',
+        locales: ['es', 'fr'],
+        routing: {
+            prefixDefaultLocale: false
+        }
+    }
 });

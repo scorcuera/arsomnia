@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import SynapseReveal from '../components/SynapseReveal.astro';
-import { useTranslations } from '../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+import SynapseReveal from '../../components/SynapseReveal.astro';
+import { useTranslations } from '../../i18n/utils';
 
 const base = import.meta.env.BASE_URL;
-const t = useTranslations('es');
+const t = useTranslations('fr');
 ---
 
-<Layout title="arsomnia" lang="es">
+<Layout title="arsomnia" lang="fr">
 	<!-- Hero Section -->
 	<section id="inicio" class="hero">
 		<SynapseReveal />
@@ -40,7 +40,7 @@ const t = useTranslations('es');
 		// Esto permite que CSS rompa líneas entre palabras, no entre letras
 		function wrapChars(el: HTMLElement | null) {
 			if (!el || el.dataset.wrapped === '1') return;
-			// Importante: preservar <br> que vienen desde las traducciones JSON
+			// Préserver les <br> provenant des traductions JSON
 			const html = el.innerHTML || '';
 			const text = html.replace(/<br\s*\/?>(\s*)/gi, '\n');
 			el.innerHTML = '';
@@ -166,7 +166,7 @@ const t = useTranslations('es');
 				<figure class="about-portrait-large">
 					<img
 						src={`${base}/sergio_corcuera.jpeg`}
-						alt="Retrato de Sergio Corcuera"
+						alt="Portrait de Sergio Corcuera"
 						loading="lazy"
 						decoding="async"
 					/>
@@ -339,7 +339,7 @@ const t = useTranslations('es');
 			if (!form || !statusEl || !submitBtn) return;
 
 			const formData = new FormData(event.target as HTMLFormElement);
-			submitBtn.textContent = 'Enviando...';
+			submitBtn.textContent = 'Envoi en cours...';
 			submitBtn.setAttribute('disabled', 'true');
 			statusEl.textContent = '';
 			statusEl.className = 'form-status';
@@ -354,19 +354,19 @@ const t = useTranslations('es');
 				});
 
 				if (response.ok) {
-					statusEl.textContent = "¡Gracias por tu mensaje! Te responderé pronto.";
+					statusEl.textContent = "Merci pour votre message ! Je vous répondrai bientôt.";
 					statusEl.classList.add('success');
 					form.reset();
 				} else {
 					const data = await response.json();
-					statusEl.textContent = data.error || 'Oops! Hubo un problema al enviar el formulario.';
+					statusEl.textContent = data.error || 'Oups ! Un problème est survenu lors de l\'envoi du formulaire.';
 					statusEl.classList.add('error');
 				}
 			} catch (error) {
-				statusEl.textContent = 'Oops! Hubo un problema de red.';
+				statusEl.textContent = 'Oups ! Un problème de réseau est survenu.';
 				statusEl.classList.add('error');
 			} finally {
-				submitBtn.textContent = 'Enviar Mensaje';
+				submitBtn.textContent = 'Envoyer le Message';
 				submitBtn.removeAttribute('disabled');
 			}
 		}
