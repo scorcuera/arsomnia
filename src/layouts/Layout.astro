@@ -72,6 +72,30 @@ const base = import.meta.env.BASE_URL;
 						nav?.classList.remove('menu-open');
 					}
 				});
+
+				// Active link on scroll
+				const sections = document.querySelectorAll('section[id]');
+				const navLi = document.querySelectorAll('.nav-links li a');
+
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							navLi.forEach(link => {
+								link.classList.remove('active');
+								if (link.getAttribute('href')?.substring(1) === entry.target.id) {
+									link.classList.add('active');
+								}
+							});
+						}
+					});
+				}, {
+					rootMargin: '-50% 0px -50% 0px',
+					threshold: 0
+				});
+
+				sections.forEach(section => {
+					observer.observe(section);
+				});
 			});
 		</script>
 	</body>
@@ -244,6 +268,14 @@ const base = import.meta.env.BASE_URL;
 		color: var(--color-accent);
 	}
 
+	.nav-links a.active {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-decoration-color: var(--color-accent);
+		text-underline-offset: 8px;
+		text-decoration-thickness: 2px;
+	}
+
 	main {
 		margin-top: 80px;
 	}
@@ -304,9 +336,11 @@ const base = import.meta.env.BASE_URL;
 			transition: all 0.2s ease;
 		}
 
-		.nav-links a:hover {
+		.nav-links a:hover, .nav-links a.active {
 			background: rgba(212, 175, 55, 0.05);
 			padding-left: 2rem;
+			color: var(--color-accent);
+			text-decoration: none;
 		}
 
 		main {
