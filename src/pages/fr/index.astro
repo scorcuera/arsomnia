@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import SynapseReveal from '../../components/SynapseReveal.astro';
 import { useTranslations } from '../../i18n/utils';
 
-const base = import.meta.env.BASE_URL;
 const t = useTranslations('fr');
 ---
 
@@ -165,7 +164,7 @@ const t = useTranslations('fr');
 			<div class="about-hero">
 				<figure class="about-portrait-large">
 					<img
-						src={`${base}/sergio_corcuera.jpeg`}
+						src="/sergio_corcuera.jpeg"
 						alt="Portrait de Sergio Corcuera"
 						loading="lazy"
 						decoding="async"
@@ -226,7 +225,7 @@ const t = useTranslations('fr');
 			</div>
 		<div class="projects-grid">
 			<a href="https://www.elnectar.io/" target="_blank" rel="noopener noreferrer" class="project-card">
-				<div class="project-image" style={`background-image: url('${base}/nectario.png');`}>
+				<div class="project-image" style={`background-image: url('/nectario.png');`}>
 				</div>
 				<div class="project-info">
 					<div class="project-header">
@@ -244,7 +243,7 @@ const t = useTranslations('fr');
 				</div>
 			</a>
 			<a href="https://www.buscando-a-hopper.com/" target="_blank" rel="noopener noreferrer" class="project-card">
-				<div class="project-image" style={`background-image: url('${base}/hopper.png');`}>
+				<div class="project-image" style={`background-image: url('/hopper.png');`}>
 				</div>
 				<div class="project-info">
 					<div class="project-header">
@@ -262,7 +261,7 @@ const t = useTranslations('fr');
 				</div>
 			</a>
 			<a href="https://vagari.world/" target="_blank" rel="noopener noreferrer" class="project-card">
-				<div class="project-image" style={`background-image: url('${base}/vagari.jpg');`}>
+				<div class="project-image" style={`background-image: url('/vagari.jpg');`}>
 				</div>
 				<div class="project-info">
 					<div class="project-header">
