@@ -14,8 +14,8 @@ const base = import.meta.env.BASE_URL;
 				Digitalizo tu proyecto creativo<br />
 			</h1>
 			<p class="hero-subtitle" id="hero-subtitle">
-				Te ayudo a traducir tu identidad estética en<br />
-				una experiencia web orgánica
+				Te ayudo a traducir tu identidad estética<br />
+				en una experiencia web orgánica
 			</p>
 			<div class="hero-buttons">
 				<a href="#proyectos" class="btn btn-primary">
@@ -37,29 +37,50 @@ const base = import.meta.env.BASE_URL;
 		let lastMouseMove = 0;
 		let animationId = 0;
 		
-		// Dividir texto en caracteres para efecto puntual (respetando espacios)
+		// Dividir texto en palabras y luego en caracteres para efecto puntual
+		// Esto permite que CSS rompa líneas entre palabras, no entre letras
 		function wrapChars(el: HTMLElement | null) {
 			if (!el || el.dataset.wrapped === '1') return;
 			const text = el.textContent || '';
 			el.innerHTML = '';
 			el.dataset.wrapped = '1';
 			
-			for (const char of text) {
-				if (char === '\n') {
+			// Dividir por saltos de línea primero
+			const lines = text.split('\n');
+			
+			lines.forEach((line, lineIndex) => {
+				if (lineIndex > 0) {
 					el.appendChild(document.createElement('br'));
-					continue;
 				}
-				if (char === ' ') {
-					el.appendChild(document.createTextNode(' '));
-					continue;
-				}
-				const span = document.createElement('span');
-				span.className = 'char';
-				span.textContent = char;
-				span.style.display = 'inline-block';
-				span.style.willChange = 'transform, filter';
-				el.appendChild(span);
-			}
+				
+				// Dividir cada línea en palabras
+				const words = line.split(' ');
+				
+				words.forEach((word, wordIndex) => {
+					if (wordIndex > 0) {
+						// Añadir espacio entre palabras
+						el.appendChild(document.createTextNode(' '));
+					}
+					
+					// Crear un span para la palabra (permite line-break)
+					const wordSpan = document.createElement('span');
+					wordSpan.className = 'word';
+					wordSpan.style.display = 'inline-block';
+					wordSpan.style.whiteSpace = 'nowrap'; // Evita que la palabra se rompa
+					
+					// Envolver cada letra de la palabra
+					for (const char of word) {
+						const charSpan = document.createElement('span');
+						charSpan.className = 'char';
+						charSpan.textContent = char;
+						charSpan.style.display = 'inline-block';
+						charSpan.style.willChange = 'transform, filter';
+						wordSpan.appendChild(charSpan);
+					}
+					
+					el.appendChild(wordSpan);
+				});
+			});
 		}
 		
 		wrapChars(heroTitle);
