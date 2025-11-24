@@ -9,7 +9,7 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 50%;
+		width: 100%;
 		height: 100%;
 		pointer-events: none;
 		opacity: 0.9;
@@ -110,15 +110,18 @@
 
 	function randomShapeParams(): ShapeParams {
 		return {
-			baseRadiusFactor: 0.8 + Math.random() * 0.15, // 80–95% del alto disponible
-			a: 0.2 + Math.random() * 0.5,
-			b: 0.2 + Math.random() * 0.5,
-			c: 0.1 + Math.random() * 0.4,
+			// Radio base alto: formas más compactas y legibles
+			baseRadiusFactor: 0.78 + Math.random() * 0.12, // 78–90% del alto disponible
+			// Amplitud moderada: variación clara pero sin romper la masa principal
+			a: 0.18 + Math.random() * 0.35,
+			b: 0.18 + Math.random() * 0.35,
+			c: 0.08 + Math.random() * 0.25,
+			// Frecuencias variadas pero acotadas para evitar ruido excesivo
 			k1: 1 + Math.floor(Math.random() * 6),
 			k2: 1 + Math.floor(Math.random() * 6),
 			k3: 1 + Math.floor(Math.random() * 6),
 			k4: 1 + Math.floor(Math.random() * 6),
-			k5: 1 + Math.floor(Math.random() * 8),
+			k5: 2 + Math.floor(Math.random() * 6),
 			phase1: Math.random() * Math.PI * 2,
 			phase2: Math.random() * Math.PI * 2,
 			phase3: Math.random() * Math.PI * 2,
@@ -208,16 +211,19 @@
 			isMouseMoving = false;
 		}
 
-		// Actualizar morphing de la forma
+		// Actualizar morphing de la forma (más lento y fluido)
 		if (isMorphing) {
-			morphT += 0.012;
+			morphT += 0.01;
 			if (morphT >= 1) {
 				morphT = 1;
 				isMorphing = false;
 				shapeFrom = copyShapeParams(shapeTo);
 			}
 		}
-		const shape = getCurrentShape();
+		// Easing muy suave para un morph calmado y continuo
+		const tShape = morphT;
+		const easedT = tShape * tShape * (3 - 2 * tShape); // smoothstep
+		const shape = isMorphing ? lerpShape(shapeFrom, shapeTo, easedT) : getCurrentShape();
 
 		// Rotación lenta 3D
 		rotY += 0.0035;
@@ -225,8 +231,10 @@
 		rotZ += 0.0009;
 
 		const minDim = Math.min(width, height);
-		const baseRadius = shape.baseRadiusFactor * (minDim * 0.45);
-		const cx = width * 0.5;
+		const baseRadius = shape.baseRadiusFactor * (minDim * 0.4);
+		// Centrar la estructura algo más a la derecha para que algunas partículas
+		// crucen suavemente hacia la zona de texto sin una división abrupta
+		const cx = width * 0.65;
 		const cy = height * 0.5;
 		const fov = 420;
 
@@ -234,18 +242,19 @@
 		const influenceRadiusSq = INFLUENCE_RADIUS * INFLUENCE_RADIUS;
 
 		let affectedCount = 0;
-		const AFFECTED_OFFSET = 3; // px de desplazamiento considerados como "afectados"
+		const AFFECTED_OFFSET = 1; // px de desplazamiento considerados como "afectados"
 
 		particles.forEach((p) => {
-			// Radio orgánico a partir de armónicos aleatorios
-			const r =
-				baseRadius *
-				(
-					1 +
-					shape.a * Math.sin(shape.k1 * p.theta + shape.phase1) * Math.sin(shape.k2 * p.phi + shape.phase2) +
-					shape.b * Math.cos(shape.k3 * p.theta + shape.phase3) * Math.cos(shape.k4 * p.phi + shape.phase4) +
-					shape.c * Math.sin(shape.k5 * (p.theta + p.phi))
-				);
+			// Radio orgánico a partir de armónicos aleatorios,
+			// limitado para mantener la forma compacta y legible
+			const rawPattern =
+				shape.a * Math.sin(shape.k1 * p.theta + shape.phase1) * Math.sin(shape.k2 * p.phi + shape.phase2) +
+				shape.b * Math.cos(shape.k3 * p.theta + shape.phase3) * Math.cos(shape.k4 * p.phi + shape.phase4) +
+				shape.c * Math.sin(shape.k5 * (p.theta + p.phi));
+
+			// Clamp suave del patrón para evitar rayos demasiado alejados
+			const clamped = Math.max(-1, Math.min(1, rawPattern));
+			const r = baseRadius * (1 + clamped * 0.35);
 
 			// Coordenadas esféricas -> 3D
 			let x = r * Math.sin(p.phi) * Math.cos(p.theta);
