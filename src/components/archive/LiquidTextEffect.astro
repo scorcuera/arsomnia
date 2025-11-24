@@ -1,0 +1,169 @@
+---
+// Efecto de texto líquido: Los caracteres se repelen cuando el cursor pasa cerca.
+// ARCHIVADO: Copia de seguridad de la animación de texto del hero.
+// Uso: Envolver el texto que se quiere animar en un contenedor con la clase 'liquid-text-container' y los elementos de texto con IDs o selectores específicos.
+---
+
+<div class="liquid-hero-example">
+    <h1 id="liquid-title" class="liquid-title">Texto Líquido de Ejemplo</h1>
+    <p id="liquid-subtitle" class="liquid-subtitle">Pasa el cursor por encima para ver el efecto.</p>
+</div>
+
+<style>
+    .liquid-hero-example {
+        padding: 4rem;
+        text-align: center;
+        background: #1a1a1a;
+        color: #fff;
+    }
+
+    .liquid-title {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+    }
+
+    .liquid-subtitle {
+        font-size: 1.5rem;
+        color: #ccc;
+    }
+
+    /* Estilos necesarios para los caracteres individuales */
+    :global(.liquid-hero-example .char) {
+        display: inline-block;
+        transition: transform 0.1s ease, filter 0.1s ease;
+        will-change: transform, filter;
+    }
+    
+    :global(.liquid-hero-example .word) {
+        display: inline-block;
+        white-space: nowrap;
+    }
+</style>
+
+<script>
+    // Efecto líquido puntual: solo afecta letras cerca del cursor
+    const container = document.querySelector<HTMLElement>('.liquid-hero-example');
+    const heroTitle = document.getElementById('liquid-title');
+    const heroSubtitle = document.getElementById('liquid-subtitle');
+    let lastMouseMove = 0;
+    let animationId = 0;
+    
+    // Dividir texto en palabras y luego en caracteres para efecto puntual
+    // Esto permite que CSS rompa líneas entre palabras, no entre letras
+    function wrapChars(el: HTMLElement | null) {
+        if (!el || el.dataset.wrapped === '1') return;
+        // Importante: preservar <br>
+        const html = el.innerHTML || '';
+        const text = html.replace(/<br\s*\/?>(\s*)/gi, '\n');
+        el.innerHTML = '';
+        el.dataset.wrapped = '1';
+        
+        // Dividir por saltos de línea primero
+        const lines = text.split('\n');
+        
+        lines.forEach((line, lineIndex) => {
+            if (lineIndex > 0) {
+                el.appendChild(document.createElement('br'));
+            }
+            
+            // Dividir cada línea en palabras
+            const words = line.split(' ');
+            
+            words.forEach((word, wordIndex) => {
+                if (wordIndex > 0) {
+                    // Añadir espacio entre palabras
+                    el.appendChild(document.createTextNode(' '));
+                }
+                
+                // Crear un span para la palabra (permite line-break)
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                
+                // Envolver cada letra de la palabra
+                for (const char of word) {
+                    const charSpan = document.createElement('span');
+                    charSpan.className = 'char';
+                    charSpan.textContent = char;
+                    wordSpan.appendChild(charSpan);
+                }
+                
+                el.appendChild(wordSpan);
+            });
+        });
+    }
+    
+    wrapChars(heroTitle);
+    wrapChars(heroSubtitle);
+    
+    const chars = [
+        ...Array.from(heroTitle?.querySelectorAll('.char') || []) as HTMLElement[],
+        ...Array.from(heroSubtitle?.querySelectorAll('.char') || []) as HTMLElement[]
+    ];
+    
+    let mouseX = -1000;
+    let mouseY = -1000;
+    
+    function updateLiquidEffect() {
+        const now = performance.now();
+        const timeSinceMove = now - lastMouseMove;
+        
+        // Efecto puntual SOLO en caracteres cerca del cursor
+        const INFLUENCE_RADIUS = 120; // Radio de influencia
+        const MAX_DISTORTION = 1.0; // Intensidad de la distorsión
+        
+        chars.forEach(char => {
+            const rect = char.getBoundingClientRect();
+            const charX = rect.left + rect.width / 2;
+            const charY = rect.top + rect.height / 2;
+            
+            const dx = charX - mouseX;
+            const dy = charY - mouseY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < INFLUENCE_RADIUS && timeSinceMove < 2000) {
+                // Calcular influencia: 1 cuando está en el centro, 0 en el borde
+                const influence = 1 - (distance / INFLUENCE_RADIUS);
+                const distortion = influence * MAX_DISTORTION;
+                
+                // Empujar las letras hacia afuera desde el cursor (efecto de repulsión)
+                const offsetX = (dx / distance) * distortion * 8; // Desplazamiento
+                const offsetY = (dy / distance) * distortion * 8; // Desplazamiento
+                const blur = influence * 1.5; // Desenfoque
+                
+                char.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+                char.style.filter = `blur(${blur}px)`;
+            } else {
+                // Letras fuera del radio o sin movimiento reciente
+                char.style.transform = 'none';
+                char.style.filter = 'none';
+            }
+        });
+        
+        // Continuar animando solo si el cursor se movió recientemente
+        if (timeSinceMove < 2500) {
+            animationId = requestAnimationFrame(updateLiquidEffect);
+        } else {
+            animationId = 0;
+        }
+    }
+    
+    if (container && window.matchMedia("(min-width: 769px)").matches) {
+        container.addEventListener('mousemove', (e: MouseEvent) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            lastMouseMove = performance.now();
+            
+            if (!animationId) {
+                animationId = requestAnimationFrame(updateLiquidEffect);
+            }
+        }, { passive: true });
+        
+        container.addEventListener('mouseleave', () => {
+            mouseX = -1000;
+            mouseY = -1000;
+        }, { passive: true });
+    }
+</script>
+
+

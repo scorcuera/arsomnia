@@ -1,0 +1,416 @@
+---
+// Animación de estanque con peces que se mueven en grupos y reaccionan al cursor
+// ARCHIVADO: Copia de seguridad de la animación original del hero.
+---
+
+<canvas id="synapse-canvas"></canvas>
+
+<style>
+	#synapse-canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		opacity: 0.8;
+		contain: strict;
+		will-change: contents;
+	}
+</style>
+
+<script>
+	const canvas = document.getElementById('synapse-canvas') as HTMLCanvasElement;
+	const ctx = canvas.getContext('2d')!;
+
+	let width = 0;
+	let height = 0;
+const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+	// Estado del cursor
+	let mouseX = -1000;
+	let mouseY = -1000;
+	let isVisible = true;
+	let animationId = 0;
+
+	// Tipo de pez con comportamiento de boid
+	type Fish = {
+		x: number;
+		y: number;
+		vx: number;
+		vy: number;
+		size: number;
+		hue: number; // variación de tono dorado
+		groupId: number;
+		currentMaxSpeed: number; // velocidad actual (cambia cuando huye)
+		panicLevel: number; // nivel de pánico (0-1)
+		particles: Particle[]; // partículas que forman el pez
+	};
+
+	// Partícula individual
+	type Particle = {
+		offsetX: number;
+		offsetY: number;
+		targetOffsetX: number;
+		targetOffsetY: number;
+		size: number;
+		alpha: number;
+		phase: number; // fase para animación
+	};
+
+	let fishes: Fish[] = [];
+	
+	// Paleta de tonos dorados
+	const goldenHues = [
+		{ h: 45, s: 80, l: 50 },   // Dorado base
+		{ h: 40, s: 75, l: 55 },   // Dorado claro
+		{ h: 50, s: 85, l: 48 },   // Dorado cálido
+		{ h: 35, s: 70, l: 52 },   // Dorado suave
+	];
+
+	// Parámetros de comportamiento de boids
+	const SEPARATION_DISTANCE = 35;
+	const ALIGNMENT_DISTANCE = 80;
+	const COHESION_DISTANCE = 100;
+	const AVOID_CURSOR_DISTANCE = 250; // Distancia para detectar cursor
+	const NORMAL_MAX_SPEED = 0.7; // Velocidad normal (lenta y tranquila)
+	const PANIC_MAX_SPEED = 3.5; // Velocidad cuando huyen (rápida)
+	const MAX_FORCE = 0.05;
+	const PANIC_THRESHOLD = 150; // Distancia para empezar a asustarse
+
+function resize() {
+		width = canvas.clientWidth;
+		height = canvas.clientHeight;
+		canvas.width = Math.floor(width * dpr);
+		canvas.height = Math.floor(height * dpr);
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+	}
+
+	// Crear partículas para un pez
+	function createParticles(fishSize: number): Particle[] {
+		const particles: Particle[] = [];
+		const numParticles = 20 + Math.floor(Math.random() * 25); // 20-30 partículas
+		
+		for (let i = 0; i < numParticles; i++) {
+			// Distribuir partículas en forma de pez (más densas al frente)
+			const t = i / numParticles;
+			const baseX = (t - 0.5) * fishSize * 3;
+			const spread = Math.sin(t * Math.PI) * fishSize * 0.8;
+			
+			const offsetX = baseX + (Math.random() - 0.5) * fishSize * 0.4;
+			const offsetY = (Math.random() - 0.5) * spread;
+			
+			particles.push({
+				offsetX,
+				offsetY,
+				targetOffsetX: offsetX,
+				targetOffsetY: offsetY,
+				size: 1 + Math.random() * 1.5, // Partículas más pequeñas
+				alpha: 0.3 + Math.random() * 0.4,
+				phase: Math.random() * Math.PI * 2
+			});
+		}
+		
+		return particles;
+	}
+
+	// Crear grupos de peces
+	function initFishes() {
+		fishes = [];
+		const numGroups = 3 + Math.floor(Math.random() * 2); // 2-3 grupos
+		
+		for (let g = 0; g < numGroups; g++) {
+			const numFish = 2 + Math.floor(Math.random() * 2); // 3-4 peces por grupo
+			const groupX = Math.random() * width;
+			const groupY = Math.random() * height;
+			const hueIndex = Math.floor(Math.random() * goldenHues.length);
+			
+			for (let i = 0; i < numFish; i++) {
+				const angle = Math.random() * Math.PI * 2;
+				const radius = Math.random() * 40;
+				const fishSize = 10 + Math.random() * 8;
+				
+				fishes.push({
+					x: groupX + Math.cos(angle) * radius,
+					y: groupY + Math.sin(angle) * radius,
+					vx: (Math.random() - 0.5) * 0.5,
+					vy: (Math.random() - 0.5) * 0.5,
+					size: fishSize,
+					hue: hueIndex,
+					groupId: g,
+					currentMaxSpeed: NORMAL_MAX_SPEED,
+					panicLevel: 0,
+					particles: createParticles(fishSize)
+				});
+			}
+		}
+	}
+
+	// Limitar vector
+	function limit(vx: number, vy: number, max: number): [number, number] {
+		const mag = Math.sqrt(vx * vx + vy * vy);
+		if (mag > max) {
+			return [(vx / mag) * max, (vy / mag) * max];
+		}
+		return [vx, vy];
+	}
+
+	// Comportamiento de boids: separación
+	function separate(fish: Fish): [number, number] {
+		let steerX = 0, steerY = 0;
+		let count = 0;
+		
+		for (const other of fishes) {
+			if (other === fish) continue;
+			const dx = fish.x - other.x;
+			const dy = fish.y - other.y;
+			const d = Math.sqrt(dx * dx + dy * dy);
+			
+			if (d > 0 && d < SEPARATION_DISTANCE) {
+				steerX += dx / d;
+				steerY += dy / d;
+				count++;
+			}
+		}
+		
+		if (count > 0) {
+			steerX /= count;
+			steerY /= count;
+		}
+		
+		return [steerX, steerY];
+	}
+
+	// Comportamiento de boids: alineación
+	function align(fish: Fish): [number, number] {
+		let avgVx = 0, avgVy = 0;
+		let count = 0;
+		
+		for (const other of fishes) {
+			if (other === fish || other.groupId !== fish.groupId) continue;
+			const dx = fish.x - other.x;
+			const dy = fish.y - other.y;
+			const d = Math.sqrt(dx * dx + dy * dy);
+			
+			if (d < ALIGNMENT_DISTANCE) {
+				avgVx += other.vx;
+				avgVy += other.vy;
+				count++;
+			}
+		}
+		
+		if (count > 0) {
+			avgVx /= count;
+			avgVy /= count;
+			return limit(avgVx - fish.vx, avgVy - fish.vy, MAX_FORCE);
+		}
+		
+		return [0, 0];
+	}
+
+	// Comportamiento de boids: cohesión
+	function cohesion(fish: Fish): [number, number] {
+		let centerX = 0, centerY = 0;
+		let count = 0;
+		
+		for (const other of fishes) {
+			if (other === fish || other.groupId !== fish.groupId) continue;
+			const dx = fish.x - other.x;
+			const dy = fish.y - other.y;
+			const d = Math.sqrt(dx * dx + dy * dy);
+			
+			if (d < COHESION_DISTANCE) {
+				centerX += other.x;
+				centerY += other.y;
+				count++;
+			}
+		}
+		
+		if (count > 0) {
+			centerX /= count;
+			centerY /= count;
+			const dx = centerX - fish.x;
+			const dy = centerY - fish.y;
+			return limit(dx * 0.01, dy * 0.01, MAX_FORCE);
+		}
+		
+		return [0, 0];
+	}
+
+	// Evitar el cursor (más sensible)
+	function avoidCursor(fish: Fish): [number, number] {
+		const dx = fish.x - mouseX;
+		const dy = fish.y - mouseY;
+		const d = Math.sqrt(dx * dx + dy * dy);
+		
+		if (d > 0 && d < AVOID_CURSOR_DISTANCE) {
+			const force = (AVOID_CURSOR_DISTANCE - d) / AVOID_CURSOR_DISTANCE;
+			// Mayor intensidad de evasión
+			return [(dx / d) * force * 0.25, (dy / d) * force * 0.25];
+		}
+		
+		return [0, 0];
+	}
+
+	// Variable para animación orgánica
+	let time = 0;
+
+	// Actualizar peces con velocidad variable y partículas
+	function updateFishes() {
+		time += 0.016; // ~60fps
+		
+		for (const fish of fishes) {
+			// Calcular distancia al cursor
+			const dx = fish.x - mouseX;
+			const dy = fish.y - mouseY;
+			const distanceToCursor = Math.sqrt(dx * dx + dy * dy);
+			
+			// Actualizar nivel de pánico basado en distancia al cursor
+			if (distanceToCursor < PANIC_THRESHOLD) {
+				// Asustarse rápido
+				const panicIntensity = 1 - (distanceToCursor / PANIC_THRESHOLD);
+				fish.panicLevel = Math.min(1, fish.panicLevel + panicIntensity * 0.3);
+			} else {
+				// Calmarse lentamente
+				fish.panicLevel *= 0.92;
+			}
+			
+			// Ajustar velocidad máxima según nivel de pánico
+			fish.currentMaxSpeed = NORMAL_MAX_SPEED + (PANIC_MAX_SPEED - NORMAL_MAX_SPEED) * fish.panicLevel;
+			
+			// Aplicar comportamientos de boids
+			const [sepX, sepY] = separate(fish);
+			const [aliX, aliY] = align(fish);
+			const [cohX, cohY] = cohesion(fish);
+			const [avoX, avoY] = avoidCursor(fish);
+			
+			// Pesos para cada comportamiento (evasión dominante cuando hay pánico)
+			const panicWeight = 1 + fish.panicLevel * 4;
+			fish.vx += sepX * 1.5 + aliX * 1.0 + cohX * 1.0 + avoX * panicWeight;
+			fish.vy += sepY * 1.5 + aliY * 1.0 + cohY * 1.0 + avoY * panicWeight;
+			
+			// Limitar velocidad según el estado actual
+			[fish.vx, fish.vy] = limit(fish.vx, fish.vy, fish.currentMaxSpeed);
+			
+			// Actualizar posición
+			fish.x += fish.vx;
+			fish.y += fish.vy;
+			
+			// Envolver en los bordes (efecto toroide)
+			if (fish.x < -20) fish.x = width + 20;
+			if (fish.x > width + 20) fish.x = -20;
+			if (fish.y < -20) fish.y = height + 20;
+			if (fish.y > height + 20) fish.y = -20;
+			
+			// Actualizar partículas
+			const speed = Math.sqrt(fish.vx * fish.vx + fish.vy * fish.vy);
+			const dispersion = fish.panicLevel * 15; // Más dispersión cuando huye
+			
+			fish.particles.forEach((particle, i) => {
+				// Movimiento orgánico con ondulación
+				const wave = Math.sin(time * 3 + particle.phase + i * 0.5);
+				const perpX = -fish.vy; // Perpendicular a la dirección
+				const perpY = fish.vx;
+				
+				particle.targetOffsetX = particle.offsetX + wave * 2 + (Math.random() - 0.5) * dispersion;
+				particle.targetOffsetY = particle.offsetY + wave * 2 + (Math.random() - 0.5) * dispersion;
+				
+				// Suavizar movimiento
+				particle.offsetX += (particle.targetOffsetX - particle.offsetX) * 0.1;
+				particle.offsetY += (particle.targetOffsetY - particle.offsetY) * 0.1;
+				
+				// Pulsar alpha
+				particle.alpha = 0.4 + Math.sin(time * 4 + particle.phase) * 0.3;
+			});
+		}
+	}
+
+	// Dibujar peces como nubes de partículas orgánicas
+	function drawFishes() {
+		ctx.clearRect(0, 0, width, height);
+		
+		for (const fish of fishes) {
+			const hue = goldenHues[fish.hue];
+			const angle = Math.atan2(fish.vy, fish.vx);
+			const color = `hsl(${hue.h}, ${hue.s}%, ${hue.l}%)`;
+			
+			ctx.save();
+			ctx.translate(fish.x, fish.y);
+			ctx.rotate(angle);
+			
+			// Dibujar cada partícula del pez
+			fish.particles.forEach(particle => {
+				// Glow de cada partícula
+				ctx.shadowBlur = particle.size * 4;
+				ctx.shadowColor = color;
+				
+				ctx.fillStyle = `hsla(${hue.h}, ${hue.s}%, ${hue.l}%, ${particle.alpha})`;
+				
+				ctx.beginPath();
+				ctx.arc(
+					particle.offsetX,
+					particle.offsetY,
+					particle.size,
+					0,
+					Math.PI * 2
+				);
+				ctx.fill();
+			});
+			
+			ctx.restore();
+		}
+	}
+
+	// Loop principal
+	function render() {
+		if (!isVisible) return;
+
+		updateFishes();
+		drawFishes();
+
+		animationId = requestAnimationFrame(render);
+	}
+
+	// Actualizar posición del cursor
+function onMove(e: MouseEvent) {
+		const rect = canvas.getBoundingClientRect();
+		mouseX = e.clientX - rect.left;
+		mouseY = e.clientY - rect.top;
+	}
+
+	// Optimización: pausar animación cuando no está visible
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			const wasVisible = isVisible;
+			isVisible = entry.isIntersecting;
+			if (isVisible && !wasVisible) {
+				animationId = requestAnimationFrame(render);
+			} else if (!isVisible && animationId) {
+				cancelAnimationFrame(animationId);
+			}
+		});
+	}, { threshold: 0.1 });
+
+	observer.observe(canvas);
+
+	function handleResize() {
+		resize();
+		initFishes();
+	}
+
+	window.addEventListener('resize', handleResize);
+	window.addEventListener('mousemove', onMove, { passive: true });
+resize();
+	initFishes();
+	animationId = requestAnimationFrame(render);
+
+	// Limpieza al navegar
+	document.addEventListener('astro:before-swap', () => {
+		observer.disconnect();
+		cancelAnimationFrame(animationId);
+		window.removeEventListener('resize', handleResize);
+		window.removeEventListener('mousemove', onMove);
+	});
+</script>
+
+
