@@ -29,56 +29,54 @@ const t = useTranslations('es');
 
 	<!-- About Section -->
 	<section id="acerca" class="about">
-		<div class="container">
-			<div class="about-hero">
-				<figure class="about-portrait-large">
-					<img
-						src="/sergio_corcuera.jpeg"
-						alt="Retrato de Sergio Corcuera"
-						loading="lazy"
-						decoding="async"
-					/>
-				</figure>
-				<div class="about-intro">
-					<h2 class="about-headline" set:html={t('about.headline')}>
-					</h2>
-					<p class="about-bio">
-						{t('about.bio')}
-					</p>
-					<a href="#contacto" class="btn btn-primary btn-cta">
-						{t('about.cta')}
-						<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-							<path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-						</svg>
-					</a>
+		<div class="about-main-viewport">
+			<div class="container">
+				<div class="about-hero">
+					<figure class="about-portrait-large">
+						<img
+							src="/sergio_corcuera.jpeg"
+							alt="Retrato de Sergio Corcuera"
+							loading="lazy"
+							decoding="async"
+						/>
+					</figure>
+					<div class="about-content">
+						<h2 class="about-headline" set:html={t('about.headline')}>
+						</h2>
+						
+						<div class="about-info-grid">
+							<div class="about-info-item">
+								<h4 class="info-subtitle">{t('about.approach_1_title')}</h4>
+								<p class="info-text" set:html={t('about.approach_1_text')}></p>
+							</div>
+							<div class="about-info-item">
+								<h4 class="info-subtitle">{t('about.approach_2_title')}</h4>
+								<p class="info-text" set:html={t('about.approach_2_text')}></p>
+							</div>
+							<div class="about-info-item">
+								<h4 class="info-subtitle">{t('about.approach_3_title')}</h4>
+								<p class="info-text" set:html={t('about.approach_3_text')}></p>
+							</div>
+						</div>
+
+						<div class="about-meta">
+							<p class="about-languages">{t('about.languages')}</p>
+							<p class="about-location">{t('about.location')}</p>
+						</div>
+					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class="about-approach">
-				<h3 class="approach-title">{t('about.approach_title')}</h3>
-				<div class="approach-grid">
-					<div class="approach-item">
-						<div class="approach-number">01</div>
-						<h4 class="approach-subtitle">{t('about.approach_1_title')}</h4>
-						<p class="approach-text">
-							{t('about.approach_1_text')}
-						</p>
-					</div>
-					<div class="approach-item">
-						<div class="approach-number">02</div>
-						<h4 class="approach-subtitle">{t('about.approach_2_title')}</h4>
-						<p class="approach-text">
-							{t('about.approach_2_text')}
-						</p>
-					</div>
-					<div class="approach-item">
-						<div class="approach-number">03</div>
-						<h4 class="approach-subtitle">{t('about.approach_3_title')}</h4>
-						<p class="approach-text">
-							{t('about.approach_3_text')}
-						</p>
-					</div>
-				</div>
+		<div class="about-what-i-build-section">
+			<div class="container">
+				<h3 class="what-i-build-title">{t('about.what_i_build_title')}</h3>
+				<ul class="what-i-build-list">
+					<li>{t('about.what_i_build_1')}</li>
+					<li>{t('about.what_i_build_2')}</li>
+					<li>{t('about.what_i_build_3')}</li>
+					<li>{t('about.what_i_build_4')}</li>
+				</ul>
 			</div>
 		</div>
 	</section>
@@ -370,17 +368,23 @@ const t = useTranslations('es');
 
 	/* About Section */
 	.about {
-		padding: 8rem 0;
 		background: var(--color-bg-secondary);
 	}
 
-	/* About Hero Section */
+	/* About Main Viewport - 100vh */
+	.about-main-viewport {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		padding: 4rem 0;
+	}
+
 	.about-hero {
 		display: grid;
-		grid-template-columns: 38% 1fr;
-		gap: 5rem;
-		align-items: center;
-		margin-bottom: 8rem;
+		grid-template-columns: 35% 1fr;
+		gap: 6rem;
+		align-items: start;
+		width: 100%;
 	}
 
 	.about-portrait-large {
@@ -392,6 +396,8 @@ const t = useTranslations('es');
 		border: 1px solid rgba(212, 175, 55, 0.1);
 		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 		position: relative;
+		position: sticky;
+		top: 6rem;
 	}
 
 	.about-portrait-large::after {
@@ -416,10 +422,10 @@ const t = useTranslations('es');
 		transform: scale(1.03);
 	}
 
-	.about-intro {
+	.about-content {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: 3rem;
 	}
 
 	.about-headline {
@@ -429,80 +435,95 @@ const t = useTranslations('es');
 		color: var(--color-text);
 		font-family: var(--font-main);
 		letter-spacing: -0.02em;
+		margin-bottom: 1rem;
 	}
 
-	.about-bio {
-		font-size: 1.15rem;
-		line-height: 1.75;
-		color: var(--color-text-light);
-		max-width: 600px;
-		font-weight: 400;
+	.about-info-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
 	}
 
-	.btn-cta {
-		display: inline-flex;
-		align-items: center;
-		align-self: flex-start;
+	.about-info-item {
+		border-left: 2px solid rgba(212, 175, 55, 0.2);
+		padding-left: 1.5rem;
+	}
+
+	.info-subtitle {
 		font-size: 1.1rem;
-		padding: 1rem 2rem;
-		box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
-	}
-
-	.btn-cta:hover {
-		box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
-		transform: translateY(-2px);
-	}
-
-	/* About Approach Section */
-	.about-approach {
-		border-top: 1px solid rgba(212, 175, 55, 0.1);
-		padding-top: 5rem;
-	}
-
-	.approach-title {
-		text-align: center;
-		margin-bottom: 4rem;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		font-size: 1rem;
 		font-weight: 600;
+		margin-bottom: 0.75rem;
 		color: var(--color-accent);
 		font-family: var(--font-main);
 	}
 
-	.approach-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 4rem;
-	}
-
-	.approach-item {
-		text-align: left;
-		position: relative;
-	}
-
-	.approach-number {
-		font-size: 3.5rem;
-		font-weight: 700;
-		color: rgba(212, 175, 55, 0.12);
-		line-height: 1;
-		margin-bottom: 1rem;
-		font-family: var(--font-main);
-	}
-
-	.approach-subtitle {
-		font-size: 1.35rem;
-		font-weight: 600;
-		margin-bottom: 0.75rem;
-		color: var(--color-text);
-		font-family: var(--font-main);
-	}
-
-	.approach-text {
+	.info-text {
 		color: var(--color-text-light);
 		line-height: 1.7;
 		font-size: 1rem;
 		font-family: var(--font-main);
+		margin: 0;
+	}
+
+	.about-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding-top: 2rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.about-languages,
+	.about-location {
+		color: var(--color-text-light);
+		font-size: 0.95rem;
+		line-height: 1.7;
+		font-family: var(--font-main);
+		margin: 0;
+	}
+
+	/* What I Build Section - Separate viewport */
+	.about-what-i-build-section {
+		padding: 8rem 0;
+		border-top: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.what-i-build-title {
+		font-size: 2rem;
+		font-weight: 600;
+		margin-bottom: 3rem;
+		color: var(--color-text);
+		font-family: var(--font-main);
+		text-align: center;
+	}
+
+	.what-i-build-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.what-i-build-list li {
+		color: var(--color-text-light);
+		font-size: 1.1rem;
+		line-height: 1.7;
+		padding-left: 2rem;
+		position: relative;
+		font-family: var(--font-main);
+	}
+
+	.what-i-build-list li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--color-accent);
+		font-weight: 600;
+		font-size: 1.3rem;
 	}
 
 	/* Legacy styles for other sections */
@@ -866,69 +887,64 @@ const t = useTranslations('es');
 			justify-content: center;
 		}
 
-		.about {
+		.about-main-viewport {
+			min-height: auto;
 			padding: 5rem 0;
 		}
 
 		.about-hero {
 			grid-template-columns: 1fr;
 			gap: 3rem;
-			margin-bottom: 5rem;
 		}
 
 		.about-portrait-large {
-			max-width: 300px;
+			max-width: 280px;
 			margin: 0 auto;
+			position: static;
 		}
 
-		.about-intro {
-			text-align: center;
-			align-items: center;
+		.about-content {
+			gap: 2.5rem;
 		}
 
 		.about-headline {
 			font-size: 1.85rem;
 			letter-spacing: -0.01em;
+			text-align: center;
 		}
 
 		.about-headline br {
 			display: none;
 		}
 
-		.about-bio {
-			font-size: 1.05rem;
-			line-height: 1.7;
+		.about-info-grid {
+			gap: 2rem;
 		}
 
-		.btn-cta {
-			width: 100%;
-			justify-content: center;
+		.info-subtitle {
+			font-size: 1rem;
 		}
 
-		.approach-title {
-			font-size: 0.85rem;
-			margin-bottom: 3rem;
-		}
-
-		.approach-grid {
-			grid-template-columns: 1fr;
-			gap: 3rem;
-		}
-
-		.approach-item {
-			text-align: center;
-		}
-
-		.approach-number {
-			font-size: 2.5rem;
-		}
-
-		.approach-subtitle {
-			font-size: 1.2rem;
-		}
-
-		.approach-text {
+		.info-text {
 			font-size: 0.95rem;
+		}
+
+		.about-what-i-build-section {
+			padding: 5rem 0;
+		}
+
+		.what-i-build-title {
+			font-size: 1.5rem;
+			margin-bottom: 2rem;
+		}
+
+		.what-i-build-list {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.what-i-build-list li {
+			font-size: 1rem;
 		}
 
 		.section-title,
