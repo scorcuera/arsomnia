@@ -177,12 +177,26 @@ const t = useTranslations('fr');
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="project-type">{t('contact.form.project_type')}</label>
-						<select id="project-type" name="project-type" required>
-							<option value="">{t('contact.form.project_type_placeholder')}</option>
-							<option value="portfolio">{t('contact.form.project_type_portfolio')}</option>
-							<option value="corporate">{t('contact.form.project_type_corporate')}</option>
-							<option value="other">{t('contact.form.project_type_other')}</option>
+						<label for="profile-type">{t('contact.form.profile_type')}</label>
+						<select id="profile-type" name="profile-type" required>
+							<option value="">{t('contact.form.profile_type_placeholder')}</option>
+							<option value="recruiter">{t('contact.form.profile_type_recruiter')}</option>
+							<option value="company">{t('contact.form.profile_type_company')}</option>
+							<option value="entrepreneur">{t('contact.form.profile_type_entrepreneur')}</option>
+							<option value="agency">{t('contact.form.profile_type_agency')}</option>
+							<option value="other">{t('contact.form.profile_type_other')}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="need-type">{t('contact.form.need_type')}</label>
+						<select id="need-type" name="need-type">
+							<option value="">{t('contact.form.need_type_placeholder')}</option>
+							<option value="job">{t('contact.form.need_type_job')}</option>
+							<option value="automation">{t('contact.form.need_type_automation')}</option>
+							<option value="app">{t('contact.form.need_type_app')}</option>
+							<option value="api">{t('contact.form.need_type_api')}</option>
+							<option value="consulting">{t('contact.form.need_type_consulting')}</option>
+							<option value="other">{t('contact.form.need_type_other')}</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -190,6 +204,7 @@ const t = useTranslations('fr');
 						<textarea id="message" name="message" rows="6" placeholder={t('contact.form.message_placeholder')} required></textarea>
 					</div>
 					<button type="submit" id="contact-submit-btn" class="btn btn-primary btn-full">{t('contact.form.submit')}</button>
+					<p class="form-trust-message">{t('contact.form.trust_message')}</p>
 				</form>
 				<p id="form-status" class="form-status"></p>
 			</div>
@@ -652,6 +667,14 @@ const t = useTranslations('fr');
 		padding: 3rem;
 		border-radius: 16px;
 		border: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.form-trust-message {
+		text-align: center;
+		margin-top: 1rem;
+		font-size: 0.875rem;
+		color: var(--color-text-light);
+		opacity: 0.8;
 	}
 
 	.form-status {

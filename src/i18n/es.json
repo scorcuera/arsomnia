@@ -43,25 +43,36 @@
     }
   },
   "contact": {
-    "title": "Hablemos de tu proyecto",
-    "subtitle": "¿Creamos algo increíble?",
+    "title": "Hablemos de tu necesidad",
+    "subtitle": "Automatización, integración o aplicación a medida",
     "form": {
       "name": "Nombre",
       "name_placeholder": "Tu nombre",
       "email": "Email",
       "email_placeholder": "tu@email.com",
-      "project_type": "Tipo de Proyecto",
-      "project_type_placeholder": "Selecciona una opción",
-      "project_type_portfolio": "Portfolio Personal",
-      "project_type_corporate": "Sitio Corporativo",
-      "project_type_other": "Otro",
+      "profile_type": "Eres...",
+      "profile_type_placeholder": "Selecciona una opción",
+      "profile_type_recruiter": "Reclutador / RRHH",
+      "profile_type_company": "Empresa (necesidad interna)",
+      "profile_type_entrepreneur": "Emprendedor / Startup",
+      "profile_type_agency": "Agencia / Partner",
+      "profile_type_other": "Otro",
+      "need_type": "¿Cuál es tu necesidad?",
+      "need_type_placeholder": "Selecciona una opción (opcional)",
+      "need_type_job": "Oferta de empleo",
+      "need_type_automation": "Automatización de procesos",
+      "need_type_app": "Desarrollo de aplicación",
+      "need_type_api": "Integración API / conectores",
+      "need_type_consulting": "Consultoría / Auditoría",
+      "need_type_other": "Otro / A discutir",
       "message": "Mensaje",
-      "message_placeholder": "Cuéntame sobre tu proyecto...",
-      "submit": "Enviar Mensaje",
+      "message_placeholder": "Describe tu necesidad, tus limitaciones o comparte un enlace a la oferta...",
+      "submit": "Enviar",
       "sending": "Enviando...",
       "success": "¡Gracias por tu mensaje! Te responderé pronto.",
       "error": "Oops! Hubo un problema al enviar el formulario.",
-      "network_error": "Oops! Hubo un problema de red."
+      "network_error": "Oops! Hubo un problema de red.",
+      "trust_message": "Respuesta en 24h • Disponible para proyectos freelance y contrato indefinido"
     }
   }
 }

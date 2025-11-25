@@ -43,25 +43,36 @@
     }
   },
   "contact": {
-    "title": "Parlons de ton projet",
-    "subtitle": "Créons quelque chose d'incroyable ?",
+    "title": "Discutons de ton besoin",
+    "subtitle": "Automatisation, intégration ou application sur mesure",
     "form": {
       "name": "Nom",
       "name_placeholder": "Ton nom",
       "email": "Email",
       "email_placeholder": "ton@email.com",
-      "project_type": "Type de Projet",
-      "project_type_placeholder": "Selectionne une option",
-      "project_type_portfolio": "Portfolio Personnel",
-      "project_type_corporate": "Site Corporate",
-      "project_type_other": "Autre",
+      "profile_type": "Tu es...",
+      "profile_type_placeholder": "Sélectionne une option",
+      "profile_type_recruiter": "Recruteur / RH",
+      "profile_type_company": "Entreprise (besoin interne)",
+      "profile_type_entrepreneur": "Entrepreneur / Startup",
+      "profile_type_agency": "Agence / Partenaire",
+      "profile_type_other": "Autre",
+      "need_type": "Quel est ton besoin ?",
+      "need_type_placeholder": "Sélectionne une option (optionnel)",
+      "need_type_job": "Offre d'emploi",
+      "need_type_automation": "Automatisation de processus",
+      "need_type_app": "Développement d'application",
+      "need_type_api": "Intégration API / connecteurs",
+      "need_type_consulting": "Conseil / Audit",
+      "need_type_other": "Autre / À discuter",
       "message": "Message",
-      "message_placeholder": "Parle-moi de ton projet...",
-      "submit": "Envoyer le Message",
+      "message_placeholder": "Décris ton besoin, tes contraintes ou partage un lien vers l'offre...",
+      "submit": "Envoyer",
       "sending": "Envoi en cours...",
       "success": "Merci pour ton message ! Je te répondrai bientôt.",
       "error": "Oups ! Un problème est survenu lors de l'envoi du formulaire.",
-      "network_error": "Oups ! Un problème de réseau est survenu."
+      "network_error": "Oups ! Un problème de réseau est survenu.",
+      "trust_message": "Réponse sous 24h • Disponible pour missions freelance et CDI"
     }
   }
 }
