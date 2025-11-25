@@ -287,8 +287,11 @@ const t = useTranslations('es');
 		color: var(--color-text);
 	}
 
-	.hero-title-accent {
+	:global(.hero-title-accent) {
 		color: var(--color-accent);
+		text-decoration: underline;
+		text-decoration-thickness: 4px;
+		text-underline-offset: 8px;
 	}
 
 	.hero-subtitle {
@@ -296,6 +299,8 @@ const t = useTranslations('es');
 		color: var(--color-text-light);
 		margin-bottom: 3rem;
 		line-height: 1.8;
+		font-weight: 100;
+		max-width: 480px; /* Forzar quiebre de línea antes */
 	}
 
 	.hero-buttons {

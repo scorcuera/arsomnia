@@ -6,7 +6,7 @@
     "contact": "Contacto"
   },
   "hero": {
-    "title": "Construyo tus herramientas",
+    "title": "Construyo tus <span class='hero-title-accent'>herramientas</span>",
     "subtitle": "Te ayudo a crear soluciones que ahorran tiempo, reducen errores y escalan con tu negocio",
     "cta_primary": "Ver Proyectos",
     "cta_secondary": "Contactar"
