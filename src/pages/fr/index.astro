@@ -166,15 +166,13 @@ const t = useTranslations('fr');
 					<!-- Honeypot field for spam protection -->
 					<input type="text" name="_gotcha" style="display:none" />
 
-					<div class="form-row">
-						<div class="form-group">
-							<label for="name">{t('contact.form.name')}</label>
-							<input type="text" id="name" name="name" placeholder={t('contact.form.name_placeholder')} required />
-						</div>
-						<div class="form-group">
-							<label for="email">{t('contact.form.email')}</label>
-							<input type="email" id="email" name="email" placeholder={t('contact.form.email_placeholder')} required />
-						</div>
+					<div class="form-group">
+						<label for="name">{t('contact.form.name')}</label>
+						<input type="text" id="name" name="name" placeholder={t('contact.form.name_placeholder')} required />
+					</div>
+					<div class="form-group">
+						<label for="email">{t('contact.form.email')}</label>
+						<input type="email" id="email" name="email" placeholder={t('contact.form.email_placeholder')} required />
 					</div>
 					<div class="form-group">
 						<label for="profile-type">{t('contact.form.profile_type')}</label>
@@ -693,13 +691,6 @@ const t = useTranslations('fr');
 		color: #F44336; /* Rojo error */
 	}
 
-	.form-row {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1.5rem;
-		margin-bottom: 1.5rem;
-	}
-
 	.form-group {
 		margin-bottom: 1.5rem;
 	}
@@ -723,6 +714,14 @@ const t = useTranslations('fr');
 		background: var(--color-bg);
 		color: var(--color-text);
 		transition: border-color 0.3s ease;
+	}
+
+	.form-group select:invalid {
+		color: rgba(255, 255, 255, 0.5); /* Placeholder plus léger */
+	}
+
+	.form-group select option {
+		color: var(--color-text); /* Options avec couleur normale */
 	}
 
 	.form-group input:focus,
