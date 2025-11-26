@@ -29,47 +29,63 @@ const t = useTranslations('es');
 
 	<!-- About Section -->
 	<section id="acerca" class="about">
-		<div class="about-main-viewport">
-			<div class="container">
-				<div class="about-hero">
-					<figure class="about-portrait-large">
-						<img
-							src="/sergio_corcuera.jpeg"
-							alt="Retrato de Sergio Corcuera"
-							loading="lazy"
-							decoding="async"
-						/>
-					</figure>
-					<div class="about-content">
-						<h2 class="about-headline" set:html={t('about.headline')}>
-						</h2>
-						
-						<div class="about-info-grid">
-							<div class="about-info-item">
-								<h4 class="info-subtitle">{t('about.approach_1_title')}</h4>
-								<p class="info-text" set:html={t('about.approach_1_text')}></p>
-							</div>
-							<div class="about-info-item">
-								<h4 class="info-subtitle">{t('about.approach_2_title')}</h4>
-								<p class="info-text" set:html={t('about.approach_2_text')}></p>
-							</div>
-							<div class="about-info-item">
-								<h4 class="info-subtitle">{t('about.approach_3_title')}</h4>
-								<p class="info-text" set:html={t('about.approach_3_text')}></p>
-							</div>
-						</div>
+		<div class="container">
+			<div class="about-header">
+				<figure class="about-portrait">
+					<img
+						src="/sergio_corcuera.jpeg"
+						alt="Retrato de Sergio Corcuera"
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+				<h2 class="about-headline">{t('about.headline')}</h2>
+				<p class="about-subtitle">{t('about.subtitle')}</p>
+				<p class="about-tagline">{t('about.tagline')}</p>
+			</div>
 
-						<div class="about-meta">
-							<p class="about-languages">{t('about.languages')}</p>
-							<p class="about-location">{t('about.location')}</p>
-						</div>
+			<div class="about-boxes">
+				<div class="about-box">
+					<div class="box-header">
+						<span class="box-icon">{t('about.box_1_icon')}</span>
+						<h3 class="box-title">{t('about.box_1_title')}</h3>
+					</div>
+					<div class="box-content">
+						<p>{t('about.box_1_line1')}</p>
+						<p>{t('about.box_1_line2')}</p>
+						<p class="box-spacer"></p>
+						<p>{t('about.box_1_line3')}</p>
+					</div>
+				</div>
+
+				<div class="about-box">
+					<div class="box-header">
+						<span class="box-icon">{t('about.box_2_icon')}</span>
+						<h3 class="box-title">{t('about.box_2_title')}</h3>
+					</div>
+					<div class="box-content">
+						<p>{t('about.box_2_line1')}</p>
+						<p class="box-spacer"></p>
+						<p>{t('about.box_2_line2')}</p>
+					</div>
+				</div>
+
+				<div class="about-box">
+					<div class="box-header">
+						<span class="box-icon">{t('about.box_3_icon')}</span>
+						<h3 class="box-title">{t('about.box_3_title')}</h3>
+					</div>
+					<div class="box-content">
+						<p>{t('about.box_3_line1')}</p>
+						<p class="box-spacer"></p>
+						<p>{t('about.box_3_line2')}</p>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="about-what-i-build-section">
-			<div class="container">
+			<div class="about-arrow">↓</div>
+
+			<div class="about-what-i-build">
 				<h3 class="what-i-build-title">{t('about.what_i_build_title')}</h3>
 				<ul class="what-i-build-list">
 					<li>{t('about.what_i_build_1')}</li>
@@ -77,6 +93,10 @@ const t = useTranslations('es');
 					<li>{t('about.what_i_build_3')}</li>
 					<li>{t('about.what_i_build_4')}</li>
 				</ul>
+			</div>
+
+			<div class="about-meta">
+				<p>{t('about.meta')}</p>
 			</div>
 		</div>
 	</section>
@@ -370,63 +390,33 @@ const t = useTranslations('es');
 	/* About Section */
 	.about {
 		background: var(--color-bg-secondary);
+		padding: 8rem 0;
 	}
 
-	/* About Main Viewport - 100vh */
-	.about-main-viewport {
-		min-height: 100vh;
-		display: flex;
-		align-items: center;
-		padding: 4rem 0;
-	}
-
-	.about-hero {
-		display: grid;
-		grid-template-columns: 35% 1fr;
-		gap: 6rem;
-		align-items: start;
-		width: 100%;
-	}
-
-	.about-portrait-large {
-		width: 100%;
-		max-width: 380px;
-		margin: 0;
-		border-radius: 16px;
-		overflow: hidden;
-		border: 1px solid rgba(212, 175, 55, 0.1);
-		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-		position: relative;
-		position: sticky;
-		top: 6rem;
-	}
-
-	.about-portrait-large::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
-		pointer-events: none;
-	}
-
-	.about-portrait-large img {
-		display: block;
-		width: 100%;
-		height: auto;
-		aspect-ratio: 3 / 4;
-		object-fit: cover;
-		filter: saturate(1.05) contrast(1.05);
-		transition: transform 0.6s ease;
-	}
-
-	.about-portrait-large:hover img {
-		transform: scale(1.03);
-	}
-
-	.about-content {
+	.about-header {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		align-items: center;
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.about-portrait {
+		width: 180px;
+		height: 180px;
+		margin: 0 0 2rem 0;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 3px solid rgba(212, 175, 55, 0.2);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+	}
+
+	.about-portrait img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: saturate(1.05) contrast(1.05);
 	}
 
 	.about-headline {
@@ -436,63 +426,100 @@ const t = useTranslations('es');
 		color: var(--color-text);
 		font-family: var(--font-main);
 		letter-spacing: -0.02em;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
 	}
 
-	.about-info-grid {
-		display: flex;
-		flex-direction: column;
-		gap: 2.5rem;
-	}
-
-	.about-info-item {
-		border-left: 2px solid rgba(212, 175, 55, 0.2);
-		padding-left: 1.5rem;
-	}
-
-	.info-subtitle {
-		font-size: 1.1rem;
-		font-weight: 600;
+	.about-subtitle {
+		font-size: 1.15rem;
+		color: var(--color-text-light);
+		font-family: var(--font-main);
 		margin-bottom: 0.75rem;
-		color: var(--color-accent);
-		font-family: var(--font-main);
+		line-height: 1.6;
+		max-width: 800px;
 	}
 
-	.info-text {
+	.about-tagline {
+		font-size: 1.15rem;
 		color: var(--color-text-light);
-		line-height: 1.7;
-		font-size: 1rem;
 		font-family: var(--font-main);
-		margin: 0;
+		line-height: 1.6;
+		max-width: 800px;
 	}
 
-	.about-meta {
+	.about-boxes {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+	}
+
+	.about-box {
+		border: 1px solid rgba(212, 175, 55, 0.2);
+		border-radius: 8px;
+		padding: 2rem;
+		background: rgba(212, 175, 55, 0.02);
+		transition: border-color 0.3s ease, background 0.3s ease;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		padding-top: 2rem;
-		border-top: 1px solid rgba(212, 175, 55, 0.1);
 	}
 
-	.about-languages,
-	.about-location {
-		color: var(--color-text-light);
-		font-size: 0.95rem;
-		line-height: 1.7;
+	.about-box:hover {
+		border-color: rgba(212, 175, 55, 0.4);
+		background: rgba(212, 175, 55, 0.04);
+	}
+
+	.box-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1.5rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.box-icon {
+		font-size: 1.75rem;
+		line-height: 1;
+	}
+
+	.box-title {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--color-text);
 		font-family: var(--font-main);
 		margin: 0;
 	}
 
-	/* What I Build Section - Separate viewport */
-	.about-what-i-build-section {
-		padding: 8rem 0;
-		border-top: 1px solid rgba(212, 175, 55, 0.1);
+	.box-content {
+		color: var(--color-text-light);
+		font-size: 1.1rem;
+		line-height: 1.6;
+		font-family: var(--font-main);
+	}
+
+	.box-content p {
+		margin: 0;
+	}
+
+	.box-spacer {
+		height: 1.5rem;
+	}
+
+	.about-arrow {
+		text-align: center;
+		font-size: 2rem;
+		color: var(--color-accent);
+		margin: 2rem 0;
+	}
+
+	.about-what-i-build {
+		margin-bottom: 3rem;
 	}
 
 	.what-i-build-title {
-		font-size: 2rem;
+		font-size: 1.5rem;
 		font-weight: 600;
-		margin-bottom: 3rem;
+		margin-bottom: 2rem;
 		color: var(--color-text);
 		font-family: var(--font-main);
 		text-align: center;
@@ -503,28 +530,43 @@ const t = useTranslations('es');
 		padding: 0;
 		margin: 0;
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: 1fr;
 		gap: 2rem;
-		max-width: 1000px;
+		max-width: 800px;
 		margin: 0 auto;
 	}
 
 	.what-i-build-list li {
 		color: var(--color-text-light);
-		font-size: 1.1rem;
-		line-height: 1.7;
-		padding-left: 2rem;
-		position: relative;
+		font-size: 1.25rem;
+		line-height: 1.6;
 		font-family: var(--font-main);
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
 	}
 
 	.what-i-build-list li::before {
-		content: '→';
-		position: absolute;
-		left: 0;
+		content: '•';
 		color: var(--color-accent);
-		font-weight: 600;
-		font-size: 1.3rem;
+		font-weight: 700;
+		font-size: 2.5rem; /* Puntos más grandes */
+		line-height: 0.7; /* Ajuste para centrar visualmente con la primera línea */
+		flex-shrink: 0;
+		margin-top: 0.1rem;
+	}
+
+	.about-meta {
+		text-align: center;
+		padding-top: 2rem;
+		border-top: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.about-meta p {
+		color: var(--color-text-light);
+		font-size: 0.95rem;
+		font-family: var(--font-main);
+		margin: 0;
 	}
 
 	/* Legacy styles for other sections */
@@ -888,64 +930,58 @@ const t = useTranslations('es');
 			justify-content: center;
 		}
 
-		.about-main-viewport {
-			min-height: auto;
+		.about {
 			padding: 5rem 0;
 		}
 
-		.about-hero {
-			grid-template-columns: 1fr;
-			gap: 3rem;
-		}
-
-		.about-portrait-large {
-			max-width: 280px;
-			margin: 0 auto;
-			position: static;
-		}
-
-		.about-content {
-			gap: 2.5rem;
+		.about-header {
+			margin-bottom: 3rem;
 		}
 
 		.about-headline {
-			font-size: 1.85rem;
-			letter-spacing: -0.01em;
-			text-align: center;
+			font-size: 2rem;
+			margin-bottom: 1rem;
 		}
 
-		.about-headline br {
-			display: none;
-		}
-
-		.about-info-grid {
-			gap: 2rem;
-		}
-
-		.info-subtitle {
+		.about-subtitle,
+		.about-tagline {
 			font-size: 1rem;
 		}
 
-		.info-text {
-			font-size: 0.95rem;
+		.about-boxes {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+			margin-bottom: 2rem;
 		}
 
-		.about-what-i-build-section {
-			padding: 5rem 0;
+		.about-box {
+			padding: 1.5rem;
+		}
+
+		.box-header {
+			margin-bottom: 1rem;
+		}
+
+		.about-arrow {
+			margin: 1.5rem 0;
+		}
+
+		.about-what-i-build {
+			margin-bottom: 2rem;
 		}
 
 		.what-i-build-title {
-			font-size: 1.5rem;
-			margin-bottom: 2rem;
+			font-size: 1.25rem;
+			margin-bottom: 1.5rem;
 		}
 
 		.what-i-build-list {
 			grid-template-columns: 1fr;
-			gap: 1.5rem;
+			gap: 1.25rem;
 		}
 
 		.what-i-build-list li {
-			font-size: 1rem;
+			font-size: 0.95rem;
 		}
 
 		.section-title,
