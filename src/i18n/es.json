@@ -14,7 +14,7 @@
   "about": {
     "headline": "Hola, soy Sergio — Product builder",
     "subtitle": "Desarrollador web (3+ años) especializado en automatización low-code/no-code.",
-    "tagline": "Combino rigor técnico + pensamiento analítico + herramientas modernas.",
+    "download_cv": "Descargar mi CV",
     "box_1_icon": "💻",
     "box_1_title": "Técnico",
     "box_1_line1": "3+ años desarrollador web",
@@ -33,7 +33,7 @@
     "what_i_build_2": "Apps a medida en 2-4 semanas (no meses)",
     "what_i_build_3": "Integraciones API entre herramientas existentes",
     "what_i_build_4": "Documentación para equipos autónomos",
-    "meta": "Idiomas: ES/FR/EN • París/remoto • Freelance y CDI"
+    "meta": "Idiomas: EN/FR/ES • París/remoto • Freelance y CDI"
   },
   "projects": {
     "title": "Proyectos Destacados",
