@@ -21,7 +21,7 @@
     "box_2_title": "Analytique",
     "box_2_line1": "Diplômé en Philosophie, Politique et Économie (UPF, Barcelone)",
     "box_2_line2": "Pensée multidisciplinaire et adaptabilité à différents contextes",
-    "box_3_title": "No-code/Low-code",
+    "box_3_title": "No-code / Low-code",
     "box_3_line1": "Make, Airtable, Bubble, N8N, Cursor, Figma",
     "box_3_line2": "Je travaille vite grâce à ces outils et je maîtrise les plus efficaces de notre époque",
     "what_i_build_title": "Ce que je construis avec ces compétences :",
@@ -34,7 +34,7 @@
   },
   "projects": {
     "title": "Projets Phares",
-    "subtitle": "Une sélection de projets que j'ai réalisés pour des artistes et créateurs",
+    "subtitle": "Une sélection d'applications et d'automatisations que j'ai réalisées en utilisant des outils LC / NC",
     "nectario": {
       "name": "El nectario",
       "category": "Blog littéraire",
