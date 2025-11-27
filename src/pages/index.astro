@@ -126,7 +126,7 @@ const t = useTranslations('es');
 	<!-- Transition Banner -->
 	<div class="transition-banner">
 		<div class="container">
-			<p class="transition-text">{t('about.transition_banner')}</p>
+			<p class="transition-text" set:html={t('about.transition_banner')}></p>
 		</div>
 	</div>
 
@@ -728,7 +728,7 @@ const t = useTranslations('es');
 	}
 
 	.contact-content {
-		max-width: 900px;
+		max-width: 700px; /* Reducido de 900px para más aire lateral */
 		margin: 0 auto;
 	}
 
@@ -748,7 +748,7 @@ const t = useTranslations('es');
 		text-align: center;
 		padding: 2rem;
 		background: var(--color-accent-secondary);
-		border-radius: 12px;
+		border-radius: 0; /* Bordes rectos si quedan tarjetas */
 		border: 1px solid rgba(212, 175, 55, 0.1);
 	}
 
@@ -757,7 +757,7 @@ const t = useTranslations('es');
 		height: 56px;
 		background: var(--color-accent);
 		color: var(--color-bg);
-		border-radius: 50%;
+		border-radius: 0; /* Iconos cuadrados también si los hubiera */
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -779,7 +779,7 @@ const t = useTranslations('es');
 	.contact-form {
 		background: var(--color-accent-secondary);
 		padding: 3rem;
-		border-radius: 16px;
+		border-radius: 0; /* Bordes rectos */
 		border: 1px solid rgba(212, 175, 55, 0.1);
 	}
 
@@ -824,20 +824,48 @@ const t = useTranslations('es');
 		width: 100%;
 		padding: 1rem;
 		border: 1px solid rgba(212, 175, 55, 0.2);
-		border-radius: 8px;
+		border-radius: 0; /* Bordes rectos en campos */
 		font-size: 1rem;
 		font-family: var(--font-main);
 		background: var(--color-bg);
 		color: var(--color-text);
 		transition: border-color 0.3s ease;
+		font-weight: 400; /* Peso normal por defecto */
+	}
+
+	.form-group select {
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(212, 175, 55, 0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+		background-repeat: no-repeat;
+		background-position: right 1.5rem center; /* Más separado del borde */
+		background-size: 1.2em;
+		padding-right: 3.5rem; /* Espacio generoso para la flecha */
+		cursor: pointer;
+		font-weight: 400 !important; /* Forzar peso normal */
 	}
 
 	.form-group select:invalid {
-		color: rgba(255, 255, 255, 0.5); /* Placeholder más ligero */
+		color: rgba(255, 255, 255, 0.5) !important; /* Placeholder más ligero */
+		font-weight: 400 !important; /* Forzar peso normal en placeholder */
 	}
 
 	.form-group select option {
-		color: var(--color-text); /* Opciones con color normal */
+		color: var(--color-text) !important; /* Opciones con color normal */
+		background: var(--color-bg) !important; /* Fondo oscuro para opciones */
+		font-weight: 400 !important; /* Peso normal */
+		padding: 0.75rem !important; /* Padding interno */
+	}
+
+	.form-group select option:hover {
+		background: rgba(212, 175, 55, 0.15) !important; /* Hover sutil */
+	}
+
+	.form-group select option:checked,
+	.form-group select option:focus {
+		background: rgba(212, 175, 55, 0.25) !important; /* Highlight para opción seleccionada */
+		color: var(--color-accent) !important;
 	}
 
 	.form-group input:focus,
