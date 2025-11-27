@@ -153,9 +153,6 @@ const t = useTranslations('fr');
 							<path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
 					</div>
-					<p class="project-description">
-						{t('projects.nectario.description')}
-					</p>
 				</div>
 			</a>
 			<a href="https://www.buscando-a-hopper.com/" target="_blank" rel="noopener noreferrer" class="project-card">
@@ -171,9 +168,6 @@ const t = useTranslations('fr');
 							<path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
 					</div>
-					<p class="project-description">
-						{t('projects.hopper.description')}
-					</p>
 				</div>
 			</a>
 			<a href="https://vagari.world/" target="_blank" rel="noopener noreferrer" class="project-card">
@@ -189,9 +183,6 @@ const t = useTranslations('fr');
 							<path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
 					</div>
-					<p class="project-description">
-						{t('projects.vagari.description')}
-					</p>
 				</div>
 			</a>
 		</div>
@@ -712,7 +703,7 @@ const t = useTranslations('fr');
 		display: flex;
 		justify-content: space-between;
 		align-items: start;
-		margin-bottom: 1rem;
+		margin-bottom: 0; /* Eliminar margen inferior ya que no hay descripción */
 	}
 
 	.project-name {
@@ -725,13 +716,7 @@ const t = useTranslations('fr');
 	.project-category {
 		font-size: 0.95rem;
 		color: var(--color-accent);
-		margin-bottom: 0.5rem;
-	}
-
-	.project-description {
-		font-size: 0.95rem;
-		color: var(--color-text-light);
-		line-height: 1.6;
+		margin-bottom: 0; /* Eliminar margen inferior */
 	}
 
 	/* Contact Section */
