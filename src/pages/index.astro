@@ -123,6 +123,13 @@ const t = useTranslations('es');
 		</div>
 	</section>
 
+	<!-- Transition Banner -->
+	<div class="transition-banner">
+		<div class="container">
+			<p class="transition-text">{t('about.transition_banner')}</p>
+		</div>
+	</div>
+
 	<!-- Projects Section -->
 	<section id="proyectos" class="projects">
 		<div class="container">
@@ -609,6 +616,33 @@ const t = useTranslations('es');
 		line-height: 1.2;
 		margin-bottom: 2rem;
 		color: var(--color-text);
+	}
+
+	/* Transition Banner */
+	.transition-banner {
+		background: var(--color-accent);
+		padding: 4rem 0;
+		text-align: center;
+		width: 100%;
+	}
+
+	.transition-text {
+		font-size: 2rem;
+		font-weight: 300;
+		color: var(--color-bg); /* Texto oscuro para contraste con fondo dorado */
+		font-family: var(--font-main);
+		letter-spacing: 0.03em;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.transition-text {
+			font-size: 1.5rem;
+		}
+		
+		.transition-banner {
+			padding: 3rem 0;
+		}
 	}
 
 	/* Projects Section */
