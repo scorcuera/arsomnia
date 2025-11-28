@@ -3,10 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 import StructureParticles from '../../components/StructureParticles.astro';
 import { useTranslations } from '../../i18n/utils';
 
-const t = useTranslations('en');
+const t = useTranslations('es');
 ---
 
-<Layout title="arsomnia" lang="en">
+<Layout title="arsomnia" lang="es">
 	<!-- Hero Section -->
 	<section id="inicio" class="hero">
 		<StructureParticles />
@@ -34,7 +34,7 @@ const t = useTranslations('en');
 				<figure class="about-portrait">
 					<img
 						src="/sergio_corcuera.jpeg"
-						alt="Portrait de Sergio Corcuera"
+						alt="Retrato de Sergio Corcuera"
 						loading="lazy"
 						decoding="async"
 					/>
@@ -245,7 +245,7 @@ const t = useTranslations('en');
 			if (!form || !statusEl || !submitBtn) return;
 
 			const formData = new FormData(event.target as HTMLFormElement);
-			submitBtn.textContent = 'Envoi en cours...';
+			submitBtn.textContent = 'Enviando...';
 			submitBtn.setAttribute('disabled', 'true');
 			statusEl.textContent = '';
 			statusEl.className = 'form-status';
@@ -260,19 +260,19 @@ const t = useTranslations('en');
 				});
 
 				if (response.ok) {
-					statusEl.textContent = "Merci pour votre message ! Je vous répondrai bientôt.";
+					statusEl.textContent = "¡Gracias por tu mensaje! Te responderé pronto.";
 					statusEl.classList.add('success');
 					form.reset();
 				} else {
 					const data = await response.json();
-					statusEl.textContent = data.error || 'Oups ! Un problème est survenu lors de l\'envoi du formulaire.';
+					statusEl.textContent = data.error || 'Oops! Hubo un problema al enviar el formulario.';
 					statusEl.classList.add('error');
 				}
 			} catch (error) {
-				statusEl.textContent = 'Oups ! Un problème de réseau est survenu.';
+				statusEl.textContent = 'Oops! Hubo un problema de red.';
 				statusEl.classList.add('error');
 			} finally {
-				submitBtn.textContent = 'Envoyer le Message';
+				submitBtn.textContent = 'Enviar Mensaje';
 				submitBtn.removeAttribute('disabled');
 			}
 		}
@@ -339,7 +339,7 @@ const t = useTranslations('en');
 		margin-bottom: 4rem;
 		line-height: 1.8;
 		font-weight: 100;
-		max-width: 480px; /* Forcer le saut de ligne plus tôt */
+		max-width: 480px; /* Forzar quiebre de línea antes */
 	}
 
 	.hero-buttons {
@@ -438,6 +438,7 @@ const t = useTranslations('en');
 
 	.about-subtitle {
 		font-size: 1.15rem;
+		font-weight: 200;
 		color: var(--color-text-light);
 		font-family: var(--font-main);
 		margin-bottom: 0;
@@ -465,7 +466,7 @@ const t = useTranslations('en');
 	.about-box:hover {
 		border-color: rgba(212, 175, 55, 0.4);
 		background: rgba(212, 175, 55, 0.04);
-		box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.4); /* Simule une bordure plus épaisse */
+		box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.4); /* Simula borde más grueso */
 	}
 
 	.box-header {
@@ -555,6 +556,7 @@ const t = useTranslations('en');
 	.what-i-build-list li {
 		color: var(--color-text-light);
 		font-size: 1.25rem;
+		font-weight: 200;
 		line-height: 1.6;
 		font-family: var(--font-main);
 		display: flex;
@@ -566,8 +568,8 @@ const t = useTranslations('en');
 		content: '•';
 		color: var(--color-accent);
 		font-weight: 700;
-		font-size: 2.5rem;
-		line-height: 0.7;
+		font-size: 2.5rem; /* Puntos más grandes */
+		line-height: 0.7; /* Ajuste para centrar visualmente con la primera línea */
 		flex-shrink: 0;
 		margin-top: 0.1rem;
 	}
@@ -605,7 +607,7 @@ const t = useTranslations('en');
 	.transition-text {
 		font-size: 2rem;
 		font-weight: 300;
-		color: var(--color-bg); /* Texte sombre pour contraste avec fond doré */
+		color: var(--color-bg); /* Texto oscuro para contraste con fondo dorado */
 		font-family: var(--font-main);
 		letter-spacing: 0.03em;
 		margin: 0;
@@ -713,7 +715,7 @@ const t = useTranslations('en');
 	}
 
 	.contact-content {
-		max-width: 700px; /* Réduit de 900px pour plus d'espace latéral */
+		max-width: 700px; /* Reducido de 900px para más aire lateral */
 		margin: 0 auto;
 	}
 
@@ -733,7 +735,7 @@ const t = useTranslations('en');
 		text-align: center;
 		padding: 2rem;
 		background: var(--color-accent-secondary);
-		border-radius: 0;
+		border-radius: 0; /* Bordes rectos si quedan tarjetas */
 		border: 1px solid rgba(212, 175, 55, 0.1);
 	}
 
@@ -742,7 +744,7 @@ const t = useTranslations('en');
 		height: 56px;
 		background: var(--color-accent);
 		color: var(--color-bg);
-		border-radius: 0;
+		border-radius: 0; /* Iconos cuadrados también si los hubiera */
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -764,7 +766,7 @@ const t = useTranslations('en');
 	.contact-form {
 		background: var(--color-accent-secondary);
 		padding: 3rem;
-		border-radius: 0; /* Bordures droites */
+		border-radius: 0; /* Bordes rectos */
 		border: 1px solid rgba(212, 175, 55, 0.1);
 	}
 
@@ -809,13 +811,13 @@ const t = useTranslations('en');
 		width: 100%;
 		padding: 1rem;
 		border: 1px solid rgba(212, 175, 55, 0.2);
-		border-radius: 0; /* Bordures droites sur les champs */
+		border-radius: 0; /* Bordes rectos en campos */
 		font-size: 1rem;
 		font-family: var(--font-main);
 		background: var(--color-bg);
 		color: var(--color-text);
 		transition: border-color 0.3s ease;
-		font-weight: 400; /* Poids normal par défaut */
+		font-weight: 400; /* Peso normal por defecto */
 	}
 
 	.form-group select {
@@ -824,32 +826,32 @@ const t = useTranslations('en');
 		-moz-appearance: none;
 		background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(212, 175, 55, 0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
 		background-repeat: no-repeat;
-		background-position: right 1.5rem center; /* Plus éloigné du bord */
+		background-position: right 1.5rem center; /* Más separado del borde */
 		background-size: 1.2em;
-		padding-right: 3.5rem; /* Espace généreux pour la flèche */
+		padding-right: 3.5rem; /* Espacio generoso para la flecha */
 		cursor: pointer;
-		font-weight: 400 !important; /* Forcer poids normal */
+		font-weight: 400 !important; /* Forzar peso normal */
 	}
 
 	.form-group select:invalid {
-		color: rgba(255, 255, 255, 0.5) !important; /* Placeholder plus léger */
-		font-weight: 400 !important; /* Forcer poids normal sur placeholder */
+		color: rgba(255, 255, 255, 0.5) !important; /* Placeholder más ligero */
+		font-weight: 400 !important; /* Forzar peso normal en placeholder */
 	}
 
 	.form-group select option {
-		color: var(--color-text) !important; /* Options avec couleur normale */
-		background: var(--color-bg) !important; /* Fond sombre pour options */
-		font-weight: 400 !important; /* Poids normal */
-		padding: 0.75rem !important; /* Padding interne */
+		color: var(--color-text) !important; /* Opciones con color normal */
+		background: var(--color-bg) !important; /* Fondo oscuro para opciones */
+		font-weight: 400 !important; /* Peso normal */
+		padding: 0.75rem !important; /* Padding interno */
 	}
 
 	.form-group select option:hover {
-		background: rgba(212, 175, 55, 0.15) !important; /* Hover subtil */
+		background: rgba(212, 175, 55, 0.15) !important; /* Hover sutil */
 	}
 
 	.form-group select option:checked,
 	.form-group select option:focus {
-		background: rgba(212, 175, 55, 0.25) !important; /* Highlight pour option sélectionnée */
+		background: rgba(212, 175, 55, 0.25) !important; /* Highlight para opción seleccionada */
 		color: var(--color-accent) !important;
 	}
 
@@ -1011,6 +1013,7 @@ const t = useTranslations('en');
 		.about-subtitle,
 		.about-tagline {
 			font-size: 1rem;
+			font-weight: 200;
 		}
 
 		.about-boxes {

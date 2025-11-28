@@ -6,7 +6,7 @@ export default defineConfig({
     site: 'https://arsomnia.dev',
     base: '/',
     i18n: {
-        defaultLocale: 'es',
+        defaultLocale: 'en',
         locales: ['es', 'fr', 'en'],
         routing: {
             prefixDefaultLocale: false

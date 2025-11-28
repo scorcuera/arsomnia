@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL;
 	<div class="lang-dropdown">
 		{Object.entries(languages).map(([lang, label]) => (
 			<a 
-				href={lang === 'es' ? '/' : `/${lang}/`}
+				href={lang === 'en' ? '/' : `/${lang}/`}
 				class={`lang-option ${currentLang === lang ? 'active' : ''}`}
 				data-lang={lang}
 			>
