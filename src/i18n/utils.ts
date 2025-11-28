@@ -1,9 +1,11 @@
 import es from './es.json';
 import fr from './fr.json';
+import en from './en.json';
 
 export const languages = {
   es: 'Español',
   fr: 'Français',
+  en: 'English',
 };
 
 export const defaultLang = 'es';
@@ -11,6 +13,7 @@ export const defaultLang = 'es';
 export const ui = {
   es,
   fr,
+  en,
 } as const;
 
 export function getLangFromUrl(url: URL) {

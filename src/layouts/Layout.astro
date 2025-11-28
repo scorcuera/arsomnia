@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { title = "arsomnia", lang } = Astro.props;
-const currentLang = (lang || getLangFromUrl(Astro.url)) as 'es' | 'fr';
+const currentLang = (lang || getLangFromUrl(Astro.url)) as 'es' | 'fr' | 'en';
 const t = useTranslations(currentLang);
 const base = import.meta.env.BASE_URL;
 ---
