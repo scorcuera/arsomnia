@@ -35,6 +35,9 @@
   "projects": {
     "title": "Featured Projects",
     "subtitle": "A selection of applications and automations I've built using LC/NC tools",
+    "filter_apps": "Apps",
+    "filter_websites": "Websites",
+    "filter_automations": "Automations",
     "nectario": {
       "name": "El nectario",
       "category": "Writing blog",

@@ -35,6 +35,9 @@
   "projects": {
     "title": "Proyectos Destacados",
     "subtitle": "Una selección de aplicaciones y automatizaciones que he realizado usando herramientas LC / NC",
+    "filter_apps": "Apps",
+    "filter_websites": "Websites",
+    "filter_automations": "Automations",
     "nectario": {
       "name": "El nectario",
       "category": "Blog de escritura",

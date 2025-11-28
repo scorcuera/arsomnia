@@ -35,6 +35,9 @@
   "projects": {
     "title": "Projets Phares",
     "subtitle": "Une sélection d'applications et d'automatisations que j'ai réalisées en utilisant des outils LC / NC",
+    "filter_apps": "Apps",
+    "filter_websites": "Websites",
+    "filter_automations": "Automations",
     "nectario": {
       "name": "El nectario",
       "category": "Blog littéraire",
