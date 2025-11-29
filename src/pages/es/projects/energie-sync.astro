@@ -1,0 +1,474 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const t = useTranslations('es');
+---
+
+<Layout title="Énergie Sync - arsomnia" lang="es">
+	<!-- Hero Section -->
+	<section class="project-hero">
+		<div class="container">
+			<a href="/es/#proyectos" class="back-link">
+				<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+					<path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				Volver a Proyectos
+			</a>
+			<h1 class="project-title">Énergie Sync</h1>
+			<p class="project-tagline">Reconciliación automática de facturación para proveedores de energía</p>
+		</div>
+	</section>
+
+	<!-- Hero Image -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-full">
+				<img src="/dashboard-energie-hero.png" alt="Tableau de bord des anomalies en temps réel" />
+				<p class="image-caption">Dashboard de anomalías en tiempo real para más de 40 clientes</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- The Problem -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">El Problema</h2>
+			<p class="section-text">
+				Las compañías energéticas gestionan datos de consumo, facturas y pagos en sistemas desconectados. 
+				Reconciliar estas fuentes manualmente consume horas en cada ciclo—y los errores siguen colándose.
+			</p>
+			<p class="section-text">
+				Los equipos de Finanzas dedican más tiempo a perseguir discrepancias que a analizar tendencias.
+			</p>
+		</div>
+	</section>
+
+	<!-- The Solution -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">La Solución</h2>
+			<p class="section-text">
+				Un pipeline automatizado que consolida tres fuentes de datos, cruza cada transacción y detecta anomalías antes de que se conviertan en problemas.
+			</p>
+		</div>
+	</section>
+
+	<!-- How It Works -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">Cómo Funciona</h2>
+			
+			<div class="workflow-step">
+				<h3 class="step-title">1. Ingesta de Datos</h3>
+				<p class="section-text">
+					Los registros de consumo, facturas y pagos bancarios se extraen automáticamente desde sus respectivos sistemas.
+				</p>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">2. Motor de Reconciliación</h3>
+				<p class="section-text">
+					Un workflow personalizado en n8n fusiona los registros por cliente y período, ejecutando reglas de validación sobre el dataset consolidado.
+				</p>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">3. Detección de Anomalías</h3>
+				<p class="section-text">El sistema identifica tres tipos de incidencias:</p>
+				<ul class="feature-list">
+					<li>Consumo sin factura (registros huérfanos)</li>
+					<li>Desajustes entre factura y pago (discrepancias de importe)</li>
+					<li>Facturas vencidas sin cobro</li>
+				</ul>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">4. Dashboard Operativo</h3>
+				<p class="section-text">
+					Los resultados alimentan una Interface de Airtable donde el equipo de Operaciones puede clasificar, asignar y resolver cada caso.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Workflow Screenshot -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-full">
+				<img src="/n8n-workflow-energie.png" alt="Workflow n8n" />
+				<p class="image-caption">El workflow de n8n gestionando la fusión de datos y la lógica de detección</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Stack -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">Stack Técnico</h2>
+			<div class="stack-table">
+				<div class="stack-row">
+					<div class="stack-tool">n8n</div>
+					<div class="stack-role">Orquestación y lógica de negocio</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">Airtable</div>
+					<div class="stack-role">Almacenamiento de datos y dashboard</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">Google Sheets</div>
+					<div class="stack-role">Fuente de datos de consumo</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">API REST</div>
+					<div class="stack-role">Integración de pagos bancarios</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Results -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">Resultados</h2>
+			<div class="results-grid">
+				<div class="result-item">
+					<div class="result-number">3</div>
+					<div class="result-text">fuentes de datos consolidadas automáticamente</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">12</div>
+					<div class="result-text">anomalías detectadas por ciclo</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">~2h</div>
+					<div class="result-text">ahorradas por reconciliación</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">0</div>
+					<div class="result-text">entrada manual de datos</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Dashboard Detail -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-centered">
+				<img src="/dashboard-energie-detail-1.png" alt="Détail du dashboard" />
+				<p class="image-caption">Desglose de anomalías por tipo y severidad, con acciones recomendadas</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="project-section project-cta">
+		<div class="container-narrow">
+			<div class="cta-buttons">
+				<a href="/es/#contacto" class="btn btn-primary">Contactar</a>
+				<a href="/es/#proyectos" class="btn btn-secondary">Ver Más Proyectos</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-content">
+				<p class="footer-text">© 2024 arsomnia</p>
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<style>
+	/* Project Hero */
+	.project-hero {
+		padding: 8rem 0 4rem;
+		background: var(--color-bg);
+	}
+
+	.back-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--color-text-light);
+		text-decoration: none;
+		font-size: 0.95rem;
+		margin-bottom: 2rem;
+		transition: color 0.3s ease;
+	}
+
+	.back-link:hover {
+		color: var(--color-accent);
+	}
+
+	.project-title {
+		font-size: 4rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+
+	.project-tagline {
+		font-size: 1.5rem;
+		color: var(--color-text-light);
+		font-weight: 300;
+	}
+
+	/* Sections */
+	.project-section {
+		padding: 4rem 0;
+	}
+
+	.project-cta {
+		padding: 6rem 0;
+	}
+
+	.container-narrow {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 2rem;
+		color: var(--color-text);
+	}
+
+	.section-text {
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: var(--color-text-light);
+		margin-bottom: 1.5rem;
+	}
+
+	/* Images */
+	.project-image-full {
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.project-image-centered {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.project-image-full img,
+	.project-image-centered img {
+		width: 100%;
+		height: auto;
+		display: block;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.image-caption {
+		text-align: center;
+		font-size: 0.9rem;
+		color: var(--color-text-light);
+		margin-top: 1rem;
+		font-style: italic;
+	}
+
+	/* Workflow Steps */
+	.workflow-step {
+		margin-bottom: 3rem;
+	}
+
+	.step-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		margin-bottom: 1rem;
+	}
+
+	.feature-list {
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0;
+	}
+
+	.feature-list li {
+		padding-left: 1.5rem;
+		position: relative;
+		margin-bottom: 0.75rem;
+		color: var(--color-text-light);
+		font-size: 1.1rem;
+	}
+
+	.feature-list li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--color-accent);
+	}
+
+	/* Stack Table */
+	.stack-table {
+		border: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.stack-row {
+		display: grid;
+		grid-template-columns: 200px 1fr;
+		border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.stack-row:last-child {
+		border-bottom: none;
+	}
+
+	.stack-tool {
+		padding: 1.25rem 1.5rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		border-right: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.stack-role {
+		padding: 1.25rem 1.5rem;
+		color: var(--color-text-light);
+	}
+
+	/* Results Grid */
+	.results-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.result-item {
+		text-align: center;
+		padding: 2rem;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+		background: rgba(13, 13, 13, 0.3);
+	}
+
+	.result-number {
+		font-size: 3rem;
+		font-weight: 700;
+		color: var(--color-accent);
+		margin-bottom: 0.5rem;
+	}
+
+	.result-text {
+		font-size: 1rem;
+		color: var(--color-text-light);
+	}
+
+	/* CTA Buttons */
+	.cta-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border-radius: 0;
+		transition: all 0.3s ease;
+		font-family: var(--font-main);
+		border: 2px solid;
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		color: var(--color-bg);
+		border-color: var(--color-accent);
+	}
+
+	.btn-primary:hover {
+		background: transparent;
+		color: var(--color-accent);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: var(--color-text);
+		border-color: rgba(212, 175, 55, 0.3);
+	}
+
+	.btn-secondary:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+	}
+
+	/* Footer */
+	.footer {
+		padding: 3rem 0;
+		border-top: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.footer-content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.footer-text {
+		color: var(--color-text-light);
+		font-size: 0.95rem;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.project-hero {
+			padding: 6rem 0 3rem;
+		}
+
+		.project-title {
+			font-size: 2.5rem;
+		}
+
+		.project-tagline {
+			font-size: 1.2rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+		}
+
+		.section-text {
+			font-size: 1rem;
+		}
+
+		.stack-row {
+			grid-template-columns: 1fr;
+		}
+
+		.stack-tool {
+			border-right: none;
+			border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+		}
+
+		.results-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.result-number {
+			font-size: 2.5rem;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+		}
+
+		.btn {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+</style>
+

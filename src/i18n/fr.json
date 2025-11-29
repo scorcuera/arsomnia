@@ -52,6 +52,11 @@
       "name": "Vagari",
       "category": "Expérience immersive",
       "description": "Expérience immersive de voyages virtuels avec un accent sur la navigation intuitive et la performance des requêtes."
+    },
+    "energie_sync": {
+      "name": "Énergie Sync",
+      "category": "Réconciliation automatisée de facturation",
+      "description": "Pipeline automatisé qui consolide consommation, factures et paiements énergétiques pour détecter les anomalies avant qu'elles ne deviennent des problèmes."
     }
   },
   "contact": {
