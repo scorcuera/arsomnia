@@ -1,0 +1,503 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { useTranslations } from '../../../i18n/utils';
+
+const t = useTranslations('fr');
+---
+
+<Layout title="Synaptic - arsomnia" lang="fr">
+	<!-- Hero Section -->
+	<section class="project-hero">
+		<div class="container">
+			<a href="/fr/#proyectos" class="back-link">
+				<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+					<path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				Retour aux Projets
+			</a>
+			<div class="hero-content">
+				<h1 class="project-title">Synaptic</h1>
+				<p class="project-tagline">Intelligence de recherche pilotée par IA qui surveille 10 000+ articles mensuellement</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Hero Image -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-hero">
+				<img src="/email-hero-synaptic.png" alt="Monthly research digest email" />
+				<p class="image-caption">Monthly research digest delivered automatically with AI-curated insights from cognitive science literature</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- The Problem -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">The Problem</h2>
+			<p class="section-text">
+				Research professionals need to stay current with hundreds of papers published monthly, but manual review is time-consuming and often misses emerging patterns.
+			</p>
+			<p class="section-text">
+				Academics spend more time searching for relevant papers than analyzing their implications.
+			</p>
+		</div>
+	</section>
+
+	<!-- The Solution -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">The Solution</h2>
+			<p class="section-text">
+				An autonomous pipeline that monitors academic databases, analyzes findings with AI, and delivers structured insights monthly—with zero manual intervention.
+			</p>
+		</div>
+	</section>
+
+	<!-- How It Works -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">How It Works</h2>
+			
+			<div class="workflow-step">
+				<h3 class="step-title">1. Scheduled Monitoring</h3>
+				<p class="section-text">
+					On the 1st of each month, the system automatically queries OpenAlex for papers published in the last 30 days, filtering by cognitive science and brain research topics.
+				</p>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">2. Data Transformation</h3>
+				<p class="section-text">
+					A JavaScript module extracts metadata (authors, citations, topics, DOIs) and formats it into clean, readable text for AI analysis.
+				</p>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">3. AI Analysis</h3>
+				<p class="section-text">Claude AI processes the research corpus, identifying:</p>
+				<ul class="feature-list">
+					<li>Key findings and breakthroughs</li>
+					<li>Emerging trends across studies</li>
+					<li>Practical implications for the field</li>
+					<li>Most significant papers with citations</li>
+				</ul>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">4. Format & Deliver</h3>
+				<p class="section-text">
+					The AI-generated markdown is converted to responsive HTML and sent via Gmail with a professional template featuring gradient headers and structured sections.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Workflow Screenshot -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-workflow">
+				<img src="/n8n-workflow-synaptic.png" alt="n8n workflow" />
+				<p class="image-caption">The n8n workflow orchestrating API calls, data transformations, and email delivery</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Stack -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">Stack</h2>
+			<div class="stack-table">
+				<div class="stack-row">
+					<div class="stack-tool">n8n</div>
+					<div class="stack-role">Workflow orchestration</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">OpenAlex API</div>
+					<div class="stack-role">Academic database (10M+ papers)</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">Anthropic Claude</div>
+					<div class="stack-role">AI analysis & synthesis</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">Gmail API</div>
+					<div class="stack-role">Email delivery</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">JavaScript</div>
+					<div class="stack-role">Data transformation & HTML conversion</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Results -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">Results</h2>
+			<div class="results-grid">
+				<div class="result-item">
+					<div class="result-number">10,000+</div>
+					<div class="result-text">papers monitored monthly</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">4h</div>
+					<div class="result-text">saved per month in manual research</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">100%</div>
+					<div class="result-text">automation rate (zero intervention)</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">$0.20</div>
+					<div class="result-text">monthly operating cost</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Email Detail -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-centered">
+				<img src="/email-detail-synaptic.png" alt="Email detail" />
+				<p class="image-caption">AI-generated insights structured in sections: Key Findings, Emerging Trends, Practical Implications, and References</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="project-section project-cta">
+		<div class="container-narrow">
+			<div class="cta-buttons">
+				<a href="/#contacto" class="btn btn-primary">Get in Touch</a>
+				<a href="/#proyectos" class="btn btn-secondary">View More Projects</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-content">
+				<p class="footer-text">© 2025 arsomnia</p>
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<style>
+	/* Project Hero */
+	.project-hero {
+		padding: 8rem 0 4rem;
+		background: var(--color-bg);
+	}
+
+	.back-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--color-text-light);
+		text-decoration: none;
+		font-size: 0.95rem;
+		margin-bottom: 3rem;
+		margin-left: 2rem;
+		transition: all 0.3s ease;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+		padding: 0.6rem 1.2rem;
+		border-radius: 0;
+	}
+
+	.back-link:hover {
+		color: var(--color-accent);
+		border-color: var(--color-accent);
+		background: rgba(212, 175, 55, 0.05);
+	}
+
+	.hero-content {
+		text-align: center;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.project-title {
+		font-size: 3.5rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+
+	.project-tagline {
+		font-size: 1.3rem;
+		color: var(--color-text-light);
+		font-weight: 300;
+	}
+
+	/* Sections */
+	.project-section {
+		padding: 4rem 0;
+	}
+
+	.project-cta {
+		padding: 6rem 0;
+	}
+
+	.container-narrow {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 2rem;
+		color: var(--color-text);
+	}
+
+	.section-text {
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: var(--color-text-light);
+		margin-bottom: 1.5rem;
+	}
+
+	/* Images */
+	.project-image-hero {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.project-image-workflow {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.project-image-centered {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.project-image-hero img,
+	.project-image-workflow img,
+	.project-image-centered img {
+		width: 100%;
+		height: auto;
+		display: block;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.image-caption {
+		text-align: center;
+		font-size: 0.9rem;
+		color: var(--color-text-light);
+		margin-top: 1rem;
+		font-style: italic;
+	}
+
+	/* Workflow Steps */
+	.workflow-step {
+		margin-bottom: 3rem;
+	}
+
+	.step-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		margin-bottom: 1rem;
+	}
+
+	.feature-list {
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0;
+	}
+
+	.feature-list li {
+		padding-left: 1.5rem;
+		position: relative;
+		margin-bottom: 0.75rem;
+		color: var(--color-text-light);
+		font-size: 1.1rem;
+	}
+
+	.feature-list li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--color-accent);
+	}
+
+	/* Stack Table */
+	.stack-table {
+		border: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.stack-row {
+		display: grid;
+		grid-template-columns: 200px 1fr;
+		border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.stack-row:last-child {
+		border-bottom: none;
+	}
+
+	.stack-tool {
+		padding: 1.25rem 1.5rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		border-right: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.stack-role {
+		padding: 1.25rem 1.5rem;
+		color: var(--color-text-light);
+	}
+
+	/* Results Grid */
+	.results-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.result-item {
+		text-align: center;
+		padding: 2rem;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+		background: rgba(13, 13, 13, 0.3);
+	}
+
+	.result-number {
+		font-size: 3rem;
+		font-weight: 700;
+		color: var(--color-accent);
+		margin-bottom: 0.5rem;
+	}
+
+	.result-text {
+		font-size: 1rem;
+		color: var(--color-text-light);
+	}
+
+	/* CTA Buttons */
+	.cta-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border-radius: 0;
+		transition: all 0.3s ease;
+		font-family: var(--font-main);
+		border: 2px solid;
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		color: var(--color-bg);
+		border-color: var(--color-accent);
+	}
+
+	.btn-primary:hover {
+		background: transparent;
+		color: var(--color-accent);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: var(--color-text);
+		border-color: rgba(212, 175, 55, 0.3);
+	}
+
+	.btn-secondary:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+	}
+
+	/* Footer */
+	.footer {
+		padding: 3rem 0;
+		border-top: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.footer-content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.footer-text {
+		color: var(--color-text-light);
+		font-size: 0.95rem;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.project-hero {
+			padding: 6rem 0 3rem;
+		}
+
+		.back-link {
+			padding: 0.5rem 1rem;
+			font-size: 0.9rem;
+			margin-left: 1rem;
+		}
+
+		.project-title {
+			font-size: 2.5rem;
+		}
+
+		.project-tagline {
+			font-size: 1.1rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+		}
+
+		.section-text {
+			font-size: 1rem;
+		}
+
+		.stack-row {
+			grid-template-columns: 1fr;
+		}
+
+		.stack-tool {
+			border-right: none;
+			border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+		}
+
+		.results-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.result-number {
+			font-size: 2.5rem;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+		}
+
+		.btn {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+</style>
