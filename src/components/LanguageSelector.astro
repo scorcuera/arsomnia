@@ -2,7 +2,29 @@
 import { languages } from '../i18n/utils';
 
 const { currentLang = 'es' } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+
+function getLocalizedPath(lang: string) {
+  // Remove trailing slash for consistency if not root
+  const path = pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname;
+  
+  // Remove current language prefix if exists
+  let cleanPath = path;
+  if (currentLang !== 'en') {
+    cleanPath = path.replace(`/${currentLang}`, '') || '/';
+  }
+  
+  // Clean up potential double slashes or empty paths
+  if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+  if (cleanPath === '//') cleanPath = '/';
+
+  // Add new language prefix (except for English which is default/root)
+  if (lang === 'en') {
+    return cleanPath;
+  }
+  
+  return cleanPath === '/' ? `/${lang}/` : `/${lang}${cleanPath}`;
+}
 ---
 
 <div class="language-selector">
@@ -17,7 +39,7 @@ const base = import.meta.env.BASE_URL;
 	<div class="lang-dropdown">
 		{Object.entries(languages).map(([lang, label]) => (
 			<a 
-				href={lang === 'en' ? '/' : `/${lang}/`}
+				href={getLocalizedPath(lang)}
 				class={`lang-option ${currentLang === lang ? 'active' : ''}`}
 				data-lang={lang}
 			>
