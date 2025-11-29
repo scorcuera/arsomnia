@@ -15,15 +15,17 @@ const t = useTranslations('en');
 				</svg>
 				Back to Projects
 			</a>
-			<h1 class="project-title">Énergie Sync</h1>
-			<p class="project-tagline">Automated billing reconciliation for energy providers</p>
+			<div class="hero-content">
+				<h1 class="project-title">Énergie Sync</h1>
+				<p class="project-tagline">Automated billing reconciliation for energy providers</p>
+			</div>
 		</div>
 	</section>
 
 	<!-- Hero Image -->
 	<section class="project-section">
 		<div class="container">
-			<div class="project-image-full">
+			<div class="project-image-hero">
 				<img src="/dashboard-energie-hero.png" alt="Real-time anomaly dashboard" />
 				<p class="image-caption">Real-time anomaly dashboard showing reconciliation status across 40+ clients</p>
 			</div>
@@ -96,7 +98,7 @@ const t = useTranslations('en');
 	<!-- Workflow Screenshot -->
 	<section class="project-section">
 		<div class="container">
-			<div class="project-image-full">
+			<div class="project-image-workflow">
 				<img src="/n8n-workflow-energie.png" alt="n8n workflow" />
 				<p class="image-caption">The n8n workflow handling data merge and anomaly detection logic</p>
 			</div>
@@ -177,7 +179,7 @@ const t = useTranslations('en');
 	<footer class="footer">
 		<div class="container">
 			<div class="footer-content">
-				<p class="footer-text">© 2024 arsomnia</p>
+				<p class="footer-text">© 2025 arsomnia</p>
 			</div>
 		</div>
 	</footer>
@@ -197,23 +199,34 @@ const t = useTranslations('en');
 		color: var(--color-text-light);
 		text-decoration: none;
 		font-size: 0.95rem;
-		margin-bottom: 2rem;
-		transition: color 0.3s ease;
+		margin-bottom: 3rem;
+		transition: all 0.3s ease;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+		padding: 0.6rem 1.2rem;
+		border-radius: 0;
 	}
 
 	.back-link:hover {
 		color: var(--color-accent);
+		border-color: var(--color-accent);
+		background: rgba(212, 175, 55, 0.05);
+	}
+
+	.hero-content {
+		text-align: center;
+		max-width: 900px;
+		margin: 0 auto;
 	}
 
 	.project-title {
-		font-size: 4rem;
+		font-size: 3.5rem;
 		font-weight: 700;
 		margin-bottom: 1rem;
 		color: var(--color-text);
 	}
 
 	.project-tagline {
-		font-size: 1.5rem;
+		font-size: 1.3rem;
 		color: var(--color-text-light);
 		font-weight: 300;
 	}
@@ -248,8 +261,13 @@ const t = useTranslations('en');
 	}
 
 	/* Images */
-	.project-image-full {
-		width: 100%;
+	.project-image-hero {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.project-image-workflow {
+		max-width: 1100px;
 		margin: 0 auto;
 	}
 
@@ -258,7 +276,8 @@ const t = useTranslations('en');
 		margin: 0 auto;
 	}
 
-	.project-image-full img,
+	.project-image-hero img,
+	.project-image-workflow img,
 	.project-image-centered img {
 		width: 100%;
 		height: auto;
@@ -428,12 +447,17 @@ const t = useTranslations('en');
 			padding: 6rem 0 3rem;
 		}
 
+		.back-link {
+			padding: 0.5rem 1rem;
+			font-size: 0.9rem;
+		}
+
 		.project-title {
 			font-size: 2.5rem;
 		}
 
 		.project-tagline {
-			font-size: 1.2rem;
+			font-size: 1.1rem;
 		}
 
 		.section-title {
