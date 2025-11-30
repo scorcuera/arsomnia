@@ -24,6 +24,14 @@ const t = useTranslations('fr');
 				<img src="/dashboard-energie-hero.png" alt="Tableau de bord des anomalies en temps réel" />
 				<p class="image-caption">Tableau de bord des anomalies en temps réel pour plus de 40 clients</p>
 			</div>
+			<div class="dashboard-cta">
+				<a href="https://airtable.com/invite/l?inviteId=invCJzK4B0nbgqYBV&inviteToken=be690f13ece97d1fa980fea17ee24a8b207fd3ee4c0677b8bd7c7c8c824d04b7&utm_medium=email&utm_source=product_team&utm_content=transactional-alerts" target="_blank" rel="noopener noreferrer" class="btn-dashboard">
+					<span>Explorer le Dashboard</span>
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+						<path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</a>
+			</div>
 		</div>
 	</section>
 
@@ -282,6 +290,43 @@ const t = useTranslations('fr');
 		color: var(--color-text-light);
 		margin-top: 1rem;
 		font-style: italic;
+	}
+
+	/* Dashboard CTA */
+	.dashboard-cta {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+
+	.btn-dashboard {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.9rem 1.8rem;
+		background: transparent;
+		color: var(--color-accent);
+		text-decoration: none;
+		font-size: 0.95rem;
+		font-weight: 500;
+		border: 1.5px solid var(--color-accent);
+		transition: all 0.3s ease;
+		letter-spacing: 0.02em;
+	}
+
+	.btn-dashboard:hover {
+		background: var(--color-accent);
+		color: var(--color-bg);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+	}
+
+	.btn-dashboard svg {
+		transition: transform 0.3s ease;
+	}
+
+	.btn-dashboard:hover svg {
+		transform: translateX(3px);
 	}
 
 	/* Workflow Steps */
