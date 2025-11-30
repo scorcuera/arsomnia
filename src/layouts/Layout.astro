@@ -18,15 +18,23 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+		<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+		<link rel="manifest" href="/favicon/site.webmanifest" />
+		
 		<title>{title}</title>
 	</head>
 	<body>
 		<nav class="nav">
 			<div class="nav-container">
 				<a href={homeUrl} class="logo">
-					<img src="/arsomnia.png" alt="arsomnia logo" class="logo-icon" />
+					<img src="/arsomnia_logo.png" alt="arsomnia logo" class="logo-icon" />
 					<span class="logo-text">arsomnia</span>
 				</a>
 				
@@ -185,6 +193,11 @@ const homeUrl = currentLang === 'en' ? '/' : `/${currentLang}/`;
 		color: var(--color-text);
 		text-decoration: none;
 		transition: opacity 0.3s ease;
+	}
+
+	.logo-text {
+		line-height: 1;
+		padding-top: 2px; /* Optical alignment */
 	}
 
 	.logo:hover {
