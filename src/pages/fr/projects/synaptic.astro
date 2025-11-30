@@ -21,8 +21,8 @@ const t = useTranslations('fr');
 	<section class="project-section">
 		<div class="container">
 			<div class="project-image-hero">
-				<img src="/email-hero-synaptic.png" alt="Monthly research digest email" />
-				<p class="image-caption">Monthly research digest delivered automatically with AI-curated insights from cognitive science literature</p>
+				<img src="/email-hero-synaptic.png" alt="Email de synthèse de recherche mensuelle" />
+				<p class="image-caption">Synthèse de recherche mensuelle livrée automatiquement avec des insights IA issus de la littérature en sciences cognitives</p>
 			</div>
 		</div>
 	</section>
@@ -30,12 +30,12 @@ const t = useTranslations('fr');
 	<!-- The Problem -->
 	<section class="project-section">
 		<div class="container-narrow">
-			<h2 class="section-title">The Problem</h2>
+			<h2 class="section-title">Le Problème</h2>
 			<p class="section-text">
-				Research professionals need to stay current with hundreds of papers published monthly, but manual review is time-consuming and often misses emerging patterns.
+				Les professionnels de la recherche doivent se tenir au courant de centaines d'articles publiés chaque mois, mais la révision manuelle prend du temps et manque souvent les tendances émergentes.
 			</p>
 			<p class="section-text">
-				Academics spend more time searching for relevant papers than analyzing their implications.
+				Les universitaires passent plus de temps à chercher des articles pertinents qu'à analyser leurs implications.
 			</p>
 		</div>
 	</section>
@@ -43,9 +43,9 @@ const t = useTranslations('fr');
 	<!-- The Solution -->
 	<section class="project-section">
 		<div class="container-narrow">
-			<h2 class="section-title">The Solution</h2>
+			<h2 class="section-title">La Solution</h2>
 			<p class="section-text">
-				An autonomous pipeline that monitors academic databases, analyzes findings with AI, and delivers structured insights monthly—with zero manual intervention.
+				Un pipeline autonome qui surveille les bases de données académiques, analyse les résultats avec l'IA et fournit des insights structurés mensuellement—sans aucune intervention manuelle.
 			</p>
 		</div>
 	</section>
@@ -53,37 +53,37 @@ const t = useTranslations('fr');
 	<!-- How It Works -->
 	<section class="project-section">
 		<div class="container-narrow">
-			<h2 class="section-title">How It Works</h2>
+			<h2 class="section-title">Fonctionnement</h2>
 			
 			<div class="workflow-step">
-				<h3 class="step-title">1. Scheduled Monitoring</h3>
+				<h3 class="step-title">1. Surveillance Programmée</h3>
 				<p class="section-text">
-					On the 1st of each month, the system automatically queries OpenAlex for papers published in the last 30 days, filtering by cognitive science and brain research topics.
+					Le 1er de chaque mois, le système interroge automatiquement OpenAlex pour les articles publiés au cours des 30 derniers jours, en filtrant par sciences cognitives et recherche sur le cerveau.
 				</p>
 			</div>
 
 			<div class="workflow-step">
-				<h3 class="step-title">2. Data Transformation</h3>
+				<h3 class="step-title">2. Transformation des Données</h3>
 				<p class="section-text">
-					A JavaScript module extracts metadata (authors, citations, topics, DOIs) and formats it into clean, readable text for AI analysis.
+					Un module JavaScript extrait les métadonnées (auteurs, citations, sujets, DOIs) et les formate en texte clair et lisible pour l'analyse IA.
 				</p>
 			</div>
 
 			<div class="workflow-step">
-				<h3 class="step-title">3. AI Analysis</h3>
-				<p class="section-text">Claude AI processes the research corpus, identifying:</p>
+				<h3 class="step-title">3. Analyse IA</h3>
+				<p class="section-text">Claude IA traite le corpus de recherche, identifiant :</p>
 				<ul class="feature-list">
-					<li>Key findings and breakthroughs</li>
-					<li>Emerging trends across studies</li>
-					<li>Practical implications for the field</li>
-					<li>Most significant papers with citations</li>
+					<li>Découvertes clés et percées</li>
+					<li>Tendances émergentes à travers les études</li>
+					<li>Implications pratiques pour le domaine</li>
+					<li>Articles les plus significatifs avec citations</li>
 				</ul>
 			</div>
 
 			<div class="workflow-step">
-				<h3 class="step-title">4. Format & Deliver</h3>
+				<h3 class="step-title">4. Formatage & Livraison</h3>
 				<p class="section-text">
-					The AI-generated markdown is converted to responsive HTML and sent via Gmail with a professional template featuring gradient headers and structured sections.
+					Le markdown généré par l'IA est converti en HTML responsive et envoyé via Gmail avec un template professionnel comportant des en-têtes en dégradé et des sections structurées.
 				</p>
 			</div>
 		</div>
@@ -93,8 +93,8 @@ const t = useTranslations('fr');
 	<section class="project-section">
 		<div class="container">
 			<div class="project-image-workflow">
-				<img src="/n8n-workflow-synaptic.png" alt="n8n workflow" />
-				<p class="image-caption">The n8n workflow orchestrating API calls, data transformations, and email delivery</p>
+				<img src="/n8n-workflow-synaptic.png" alt="Workflow n8n" />
+				<p class="image-caption">Le workflow n8n orchestrant les appels API, les transformations de données et la livraison d'emails</p>
 			</div>
 		</div>
 	</section>
@@ -106,23 +106,23 @@ const t = useTranslations('fr');
 			<div class="stack-table">
 				<div class="stack-row">
 					<div class="stack-tool">n8n</div>
-					<div class="stack-role">Workflow orchestration</div>
+					<div class="stack-role">Orchestration de workflows</div>
 				</div>
 				<div class="stack-row">
 					<div class="stack-tool">OpenAlex API</div>
-					<div class="stack-role">Academic database (10M+ papers)</div>
+					<div class="stack-role">Base de données académique (10M+ articles)</div>
 				</div>
 				<div class="stack-row">
 					<div class="stack-tool">Anthropic Claude</div>
-					<div class="stack-role">AI analysis & synthesis</div>
+					<div class="stack-role">Analyse & synthèse IA</div>
 				</div>
 				<div class="stack-row">
 					<div class="stack-tool">Gmail API</div>
-					<div class="stack-role">Email delivery</div>
+					<div class="stack-role">Livraison d'emails</div>
 				</div>
 				<div class="stack-row">
 					<div class="stack-tool">JavaScript</div>
-					<div class="stack-role">Data transformation & HTML conversion</div>
+					<div class="stack-role">Transformation de données & conversion HTML</div>
 				</div>
 			</div>
 		</div>
@@ -131,23 +131,23 @@ const t = useTranslations('fr');
 	<!-- Results -->
 	<section class="project-section">
 		<div class="container-narrow">
-			<h2 class="section-title">Results</h2>
+			<h2 class="section-title">Résultats</h2>
 			<div class="results-grid">
 				<div class="result-item">
-					<div class="result-number">10,000+</div>
-					<div class="result-text">papers monitored monthly</div>
+					<div class="result-number">10 000+</div>
+					<div class="result-text">articles surveillés mensuellement</div>
 				</div>
 				<div class="result-item">
 					<div class="result-number">4h</div>
-					<div class="result-text">saved per month in manual research</div>
+					<div class="result-text">économisées par mois en recherche manuelle</div>
 				</div>
 				<div class="result-item">
 					<div class="result-number">100%</div>
-					<div class="result-text">automation rate (zero intervention)</div>
+					<div class="result-text">taux d'automatisation (zéro intervention)</div>
 				</div>
 				<div class="result-item">
-					<div class="result-number">$0.20</div>
-					<div class="result-text">monthly operating cost</div>
+					<div class="result-number">0,20$</div>
+					<div class="result-text">coût d'exploitation mensuel</div>
 				</div>
 			</div>
 		</div>
@@ -157,8 +157,8 @@ const t = useTranslations('fr');
 	<section class="project-section">
 		<div class="container">
 			<div class="project-image-centered">
-				<img src="/email-detail-synaptic.png" alt="Email detail" />
-				<p class="image-caption">AI-generated insights structured in sections: Key Findings, Emerging Trends, Practical Implications, and References</p>
+				<img src="/email-detail-synaptic.png" alt="Détail de l'email" />
+				<p class="image-caption">Insights générés par IA structurés en sections : Découvertes Clés, Tendances Émergentes, Implications Pratiques et Références</p>
 			</div>
 		</div>
 	</section>
@@ -167,8 +167,8 @@ const t = useTranslations('fr');
 	<section class="project-section project-cta">
 		<div class="container-narrow">
 			<div class="cta-buttons">
-				<a href="/#contacto" class="btn btn-primary">Get in Touch</a>
-				<a href="/#proyectos" class="btn btn-secondary">View More Projects</a>
+				<a href="/fr/#contacto" class="btn btn-primary">Me Contacter</a>
+				<a href="/fr/#proyectos" class="btn btn-secondary">Voir Plus de Projets</a>
 			</div>
 		</div>
 	</section>
