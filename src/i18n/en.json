@@ -59,7 +59,7 @@
       "description": "Automated pipeline that consolidates energy consumption, invoices, and payments to detect anomalies before they become problems."
     },
     "synaptic": {
-      "name": "Synaptic",
+      "name": "Synaptic Digest",
       "category": "AI-powered research intelligence",
       "description": "Autonomous pipeline that monitors academic databases, analyzes findings with AI, and delivers structured insights monthly with zero manual intervention."
     }

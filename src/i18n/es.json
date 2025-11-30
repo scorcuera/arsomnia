@@ -59,7 +59,7 @@
       "description": "Pipeline automatizado que consolida consumo, facturas y pagos energéticos para detectar anomalías antes de que se conviertan en problemas."
     },
     "synaptic": {
-      "name": "Synaptic",
+      "name": "Synaptic Digest",
       "category": "Inteligencia de investigación impulsada por IA",
       "description": "Pipeline autónomo que monitorea bases de datos académicas, analiza hallazgos con IA, y entrega insights estructurados mensualmente sin intervención manual."
     }
