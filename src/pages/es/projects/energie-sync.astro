@@ -9,13 +9,8 @@ const t = useTranslations('es');
 	<!-- Hero Section -->
 	<section class="project-hero">
 		<div class="container">
-			<a href="/es/#proyectos" class="back-link">
-				<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-					<path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-				Volver a Proyectos
-			</a>
 			<div class="hero-content">
+				<a href="/es/#proyectos" class="back-link">← Volver a Proyectos</a>
 				<h1 class="project-title">Énergie Sync</h1>
 				<p class="project-tagline">Reconciliación automática de facturación para proveedores de energía</p>
 			</div>
@@ -187,31 +182,25 @@ const t = useTranslations('es');
 <style>
 	/* Project Hero */
 	.project-hero {
-		padding: 5rem 0 3rem;
+		padding: 3rem 0 3rem;
 		background: var(--color-bg);
 	}
 
 	.back-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
+		display: inline-block;
 		color: var(--color-text-light);
 		text-decoration: none;
 		font-size: 0.9rem;
-		margin-bottom: 2.5rem;
-		transition: color 0.3s ease;
+		margin-bottom: 3rem;
+		transition: all 0.3s ease;
+		opacity: 0.7;
+		letter-spacing: 0.02em;
 	}
 
 	.back-link:hover {
 		color: var(--color-accent);
-	}
-
-	.back-link svg {
-		transition: transform 0.3s ease;
-	}
-
-	.back-link:hover svg {
-		transform: translateX(-3px);
+		opacity: 1;
+		transform: translateX(-4px);
 	}
 
 	.hero-content {
@@ -446,12 +435,19 @@ const t = useTranslations('es');
 	/* Responsive */
 	@media (max-width: 768px) {
 		.project-hero {
-			padding: 4rem 0 2rem;
+			padding: 2.5rem 0 2rem;
+		}
+
+		.project-hero .container,
+		.project-section .container,
+		.project-section .container-narrow {
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
 		}
 
 		.back-link {
 			font-size: 0.85rem;
-			margin-bottom: 2rem;
+			margin-bottom: 2.5rem;
 		}
 
 		.project-title {
