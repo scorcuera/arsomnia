@@ -1,0 +1,551 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations('en');
+---
+
+<Layout title="Advocate Engine - arsomnia" lang="en">
+	<!-- Hero Section -->
+	<section class="project-hero">
+		<div class="container">
+			<div class="hero-content">
+				<a href="/#proyectos" class="back-link">← Back to Projects</a>
+				<h1 class="project-title">Advocate Engine</h1>
+				<p class="project-tagline">Intelligent content curation for Employee Advocacy platforms</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Hero Image -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-hero">
+				<img src="/dashboard-advocate-hero.png" alt="Dashboard showing analytics and content filtering" />
+				<p class="image-caption">Real-time dashboard with AI-analyzed content, relevance scoring, and multi-channel copy generation</p>
+			</div>
+			<div class="dashboard-cta">
+				<a href="https://scorcuera.github.io/advocate_engine/" target="_blank" rel="noopener noreferrer" class="btn-dashboard">
+					<span>Explore Live Dashboard</span>
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+						<path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- The Problem -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">The Problem</h2>
+			<p class="section-text">
+				Employee Advocacy platforms need fresh, relevant content for thousands of employees to share on social media.
+			</p>
+			<p class="section-text">
+				Customer Success Managers spend 10-20 hours per week manually searching articles, writing social copies, and categorizing content by industry—a process that doesn't scale across 180+ countries.
+			</p>
+			<p class="section-text">
+				Finance teams spend more time hunting content than engaging clients strategically.
+			</p>
+		</div>
+	</section>
+
+	<!-- The Solution -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">The Solution</h2>
+			<p class="section-text">
+				An autonomous pipeline that captures content from premium sources, analyzes it with AI, generates multi-channel copies in French, and surfaces the best articles through an intelligent scoring system.
+			</p>
+		</div>
+	</section>
+
+	<!-- How It Works -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">How It Works</h2>
+			
+			<div class="workflow-step">
+				<h3 class="step-title">1. Content Capture</h3>
+				<p class="section-text">
+					Every 6 hours, the system monitors 5 premium RSS feeds (TechCrunch, Fast Company, Blog du Modérateur, Les Échos, Le Monde), filtering articles by relevant keywords.
+				</p>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">2. AI Analysis</h3>
+				<p class="section-text">Claude AI processes each article, generating:</p>
+				<ul class="feature-list">
+					<li>Executive summary in French</li>
+					<li>Relevance score (1-10) for Employee Advocacy</li>
+					<li>Industry categorization</li>
+					<li>Sentiment analysis</li>
+					<li>3 optimized copies: LinkedIn, Twitter, Intranet</li>
+				</ul>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">3. Intelligent Deduplication</h3>
+				<p class="section-text">
+					A validation layer cross-references URLs against the existing database, preventing duplicate content across sources and executions.
+				</p>
+			</div>
+
+			<div class="workflow-step">
+				<h3 class="step-title">4. CSM Dashboard</h3>
+				<p class="section-text">
+					Content managers filter by industry, sentiment, and relevance score, then approve or reject articles with one click. Analytics track system performance and content quality.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Workflow Screenshot -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-workflow">
+				<img src="/n8n-workflow-advocate-1.png" alt="n8n workflow - RSS capture and AI analysis" />
+				<p class="image-caption">The n8n workflow orchestrating RSS capture, AI analysis, and Airtable updates</p>
+			</div>
+			<div class="project-image-workflow" style="margin-top: 3rem;">
+				<img src="/n8n-workflow-advocate-2.png" alt="n8n workflow - Analytics and metrics" />
+				<p class="image-caption">Analytics workflow calculating system performance and content quality metrics</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Stack -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">Stack</h2>
+			<div class="stack-table">
+				<div class="stack-row">
+					<div class="stack-tool">n8n Cloud (EU)</div>
+					<div class="stack-role">Workflow orchestration & automation</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">Anthropic Claude Sonnet 4</div>
+					<div class="stack-role">AI content analysis & generation</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">Airtable</div>
+					<div class="stack-role">Structured content database</div>
+				</div>
+				<div class="stack-row">
+					<div class="stack-tool">React + TailwindCSS</div>
+					<div class="stack-role">Professional dashboard interface</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Results -->
+	<section class="project-section">
+		<div class="container-narrow">
+			<h2 class="section-title">Results</h2>
+			<div class="results-grid">
+				<div class="result-item">
+					<div class="result-number">116</div>
+					<div class="result-text">articles captured automatically</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">7.1/10</div>
+					<div class="result-text">average relevance score</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">40h</div>
+					<div class="result-text">saved per CSM per month</div>
+				</div>
+				<div class="result-item">
+					<div class="result-number">€144K</div>
+					<div class="result-text">annual cost savings (10 CSMs)</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Dashboard Detail -->
+	<section class="project-section">
+		<div class="container">
+			<div class="project-image-centered">
+				<img src="/dashboard-advocate-analytics.png" alt="Analytics detail" />
+				<p class="image-caption">System analytics showing articles analyzed, average score, and top industry category</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Section -->
+	<section class="project-section project-cta">
+		<div class="container-narrow">
+			<div class="cta-buttons">
+				<a href="/#contacto" class="btn btn-primary">Get in Touch</a>
+				<a href="/#proyectos" class="btn btn-secondary">View More Projects</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-content">
+				<p class="footer-text">© 2025 arsomnia</p>
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<style>
+	/* Project Hero */
+	.project-hero {
+		padding: 3rem 0 3rem;
+		background: var(--color-bg);
+	}
+
+	.back-link {
+		display: inline-block;
+		color: var(--color-text-light);
+		text-decoration: none;
+		font-size: 0.9rem;
+		margin-bottom: 3rem;
+		transition: all 0.3s ease;
+		opacity: 0.7;
+		letter-spacing: 0.02em;
+	}
+
+	.back-link:hover {
+		color: var(--color-accent);
+		opacity: 1;
+		transform: translateX(-4px);
+	}
+
+	.hero-content {
+		text-align: center;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.project-title {
+		font-size: 3.5rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+
+	.project-tagline {
+		font-size: 1.3rem;
+		color: var(--color-text-light);
+		font-weight: 300;
+	}
+
+	/* Sections */
+	.project-section {
+		padding: 4rem 0;
+	}
+
+	.project-cta {
+		padding: 6rem 0;
+	}
+
+	.container-narrow {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 2rem;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 2rem;
+		color: var(--color-text);
+	}
+
+	.section-text {
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: var(--color-text-light);
+		margin-bottom: 1.5rem;
+	}
+
+	/* Images */
+	.project-image-hero {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.project-image-workflow {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.project-image-centered {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.project-image-hero img,
+	.project-image-workflow img,
+	.project-image-centered img {
+		width: 100%;
+		height: auto;
+		display: block;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.image-caption {
+		text-align: center;
+		font-size: 0.9rem;
+		color: var(--color-text-light);
+		margin-top: 1rem;
+		font-style: italic;
+	}
+
+	/* Dashboard CTA */
+	.dashboard-cta {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+
+	.btn-dashboard {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.9rem 1.8rem;
+		background: transparent;
+		color: var(--color-accent);
+		text-decoration: none;
+		font-size: 0.95rem;
+		font-weight: 500;
+		border: 1.5px solid var(--color-accent);
+		transition: all 0.3s ease;
+		letter-spacing: 0.02em;
+	}
+
+	.btn-dashboard:hover {
+		background: var(--color-accent);
+		color: var(--color-bg);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+	}
+
+	.btn-dashboard svg {
+		transition: transform 0.3s ease;
+	}
+
+	.btn-dashboard:hover svg {
+		transform: translateX(3px);
+	}
+
+	/* Workflow Steps */
+	.workflow-step {
+		margin-bottom: 3rem;
+	}
+
+	.step-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		margin-bottom: 1rem;
+	}
+
+	.feature-list {
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0;
+	}
+
+	.feature-list li {
+		padding-left: 1.5rem;
+		position: relative;
+		margin-bottom: 0.75rem;
+		color: var(--color-text-light);
+		font-size: 1.1rem;
+	}
+
+	.feature-list li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: var(--color-accent);
+	}
+
+	/* Stack Table */
+	.stack-table {
+		border: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.stack-row {
+		display: grid;
+		grid-template-columns: 250px 1fr;
+		border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.stack-row:last-child {
+		border-bottom: none;
+	}
+
+	.stack-tool {
+		padding: 1.25rem 1.5rem;
+		font-weight: 600;
+		color: var(--color-accent);
+		border-right: 1px solid rgba(212, 175, 55, 0.1);
+	}
+
+	.stack-role {
+		padding: 1.25rem 1.5rem;
+		color: var(--color-text-light);
+	}
+
+	/* Results Grid */
+	.results-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.result-item {
+		text-align: center;
+		padding: 2rem;
+		border: 1px solid rgba(212, 175, 55, 0.2);
+		background: rgba(13, 13, 13, 0.3);
+	}
+
+	.result-number {
+		font-size: 3rem;
+		font-weight: 700;
+		color: var(--color-accent);
+		margin-bottom: 0.5rem;
+	}
+
+	.result-text {
+		font-size: 1rem;
+		color: var(--color-text-light);
+	}
+
+	/* CTA Buttons */
+	.cta-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border-radius: 0;
+		transition: all 0.3s ease;
+		font-family: var(--font-main);
+		border: 2px solid;
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		color: var(--color-bg);
+		border-color: var(--color-accent);
+	}
+
+	.btn-primary:hover {
+		background: transparent;
+		color: var(--color-accent);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: var(--color-text);
+		border-color: rgba(212, 175, 55, 0.3);
+	}
+
+	.btn-secondary:hover {
+		border-color: var(--color-accent);
+		color: var(--color-accent);
+	}
+
+	/* Footer */
+	.footer {
+		padding: 3rem 0;
+		border-top: 1px solid rgba(212, 175, 55, 0.2);
+	}
+
+	.footer-content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.footer-text {
+		color: var(--color-text-light);
+		font-size: 0.95rem;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.project-hero {
+			padding: 2.5rem 0 2rem;
+		}
+
+		.project-hero .container,
+		.project-section .container,
+		.project-section .container-narrow {
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+
+		.back-link {
+			font-size: 0.85rem;
+			margin-bottom: 2.5rem;
+		}
+
+		.project-title {
+			font-size: 2.5rem;
+		}
+
+		.project-tagline {
+			font-size: 1.1rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+		}
+
+		.section-text {
+			font-size: 1rem;
+		}
+
+		.stack-row {
+			grid-template-columns: 1fr;
+		}
+
+		.stack-tool {
+			border-right: none;
+			border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+		}
+
+		.results-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.result-number {
+			font-size: 2.5rem;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+		}
+
+		.btn {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+</style>
+</Layout>
+
