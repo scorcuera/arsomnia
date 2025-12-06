@@ -62,6 +62,11 @@
       "name": "Synaptic Digest",
       "category": "AI-powered research intelligence",
       "description": "Autonomous pipeline that monitors academic databases, analyzes findings with AI, and delivers structured insights monthly with zero manual intervention."
+    },
+    "advocate_engine": {
+      "name": "Advocate Engine",
+      "category": "Intelligent content curation",
+      "description": "Autonomous pipeline that captures content from premium sources, analyzes it with AI, and generates multi-channel copies for Employee Advocacy platforms."
     }
   },
   "contact": {

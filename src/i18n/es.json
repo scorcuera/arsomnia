@@ -62,6 +62,11 @@
       "name": "Synaptic Digest",
       "category": "Inteligencia de investigación impulsada por IA",
       "description": "Pipeline autónomo que monitorea bases de datos académicas, analiza hallazgos con IA, y entrega insights estructurados mensualmente sin intervención manual."
+    },
+    "advocate_engine": {
+      "name": "Advocate Engine",
+      "category": "Curación inteligente de contenido",
+      "description": "Pipeline autónomo que captura contenido desde fuentes premium, lo analiza con IA, y genera copys multicanal para plataformas de Employee Advocacy."
     }
   },
   "contact": {
